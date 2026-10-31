@@ -87,6 +87,7 @@
 .nav {
   display: flex;
   align-items: center;
+  position: relative; /* For mobile dropdown */
 }
 
 .nav__list {
@@ -177,14 +178,8 @@
 .tab-rail__tab--navy { background-color: var(--tab-navy); }
 .tab-rail__tab--gold { background-color: var(--gold); }
 
-/* Hide mobile menu elements on desktop */
-.mobile-menu,
-.mobile-menu-overlay {
-  display: none;
-}
-
 /* =========================================
-   SIMPLE MOBILE DROPDOWN MENU
+   PERFECT MOBILE DROPDOWN MENU
    ========================================= */
 @media (max-width: 1023px) {
   /* Show the hamburger button */
@@ -203,7 +198,7 @@
     display: block;
     width: 24px;
     height: 2px;
-    background-color: #0B1A33; /* Dark navy */
+    background-color: #0B1A33;
   }
 
   /* Hide the desktop links by default */
@@ -211,12 +206,13 @@
     display: none !important; 
     position: absolute;
     top: 100%;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: 250px;
     background-color: var(--white);
     flex-direction: column;
-    padding: var(--sp-md) var(--sp-lg);
-    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    padding: var(--sp-sm);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
     z-index: 9998;
   }
 
@@ -236,8 +232,8 @@
 
   .nav__link {
     display: block;
-    padding: var(--sp-sm) 0;
-    font-size: 1.125rem;
+    padding: var(--sp-sm) var(--sp-xs);
+    font-size: 1rem;
   }
 }
 

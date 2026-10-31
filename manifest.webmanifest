@@ -1,0 +1,54 @@
+{
+  "name": "Gerald Lynn, C.M.R.",
+  "short_name": "Gerald Lynn",
+  "description": "Author of Surviving the U.S. Healthcare System: the Patient's Playbook. Patient advocate, healthcare navigator, and educator.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "lang": "en-US",
+  "dir": "ltr",
+  "theme_color": "#12263a",
+  "background_color": "#faf6ef",
+  "categories": ["books", "education", "health"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "The Book",
+      "short_name": "The Book",
+      "description": "What Surviving the U.S. Healthcare System covers",
+      "url": "/about/index.html"
+    },
+    {
+      "name": "Chapters",
+      "short_name": "Chapters",
+      "description": "Chapter list and previews",
+      "url": "/chapters/index.html"
+    },
+    {
+      "name": "Speaking",
+      "short_name": "Speaking",
+      "description": "Request Gerald for your event",
+      "url": "/speaking/index.html"
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch",
+      "url": "/contact/index.html"
+    }
+  ]
+}

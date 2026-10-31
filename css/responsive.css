@@ -1,0 +1,1971 @@
+/* css/responsive.css
+ * Gerald Lynn Author Website — Responsive Breakpoints
+ * ====================================================
+ * Mobile-first approach. Breakpoints:
+ *   480px  — Large phones
+ *   640px  — Small tablets
+ *   768px  — Tablets (portrait)
+ *   1024px — Tablets (landscape) / Small desktops
+ *   1280px — Desktops
+ *   1536px — Large desktops
+ *
+ * Covers every component in style.css, header.css, and footer.css.
+ * Includes safe-area insets, landscape-phone fixes, prefers-reduced-motion.
+ */
+
+
+/* ==========================================================================
+   SECTION 1: SAFE AREA INSETS (iPhone notches, Android gesture bars)
+   ========================================================================== */
+
+@supports (padding: max(0px)) {
+  .site-header__inner {
+    padding-left: max(var(--container-pad), env(safe-area-inset-left));
+    padding-right: max(var(--container-pad), env(safe-area-inset-right));
+  }
+
+  .mobile-menu {
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .mobile-menu__header,
+  .mobile-menu__nav,
+  .mobile-menu__cta,
+  .mobile-menu__social,
+  .mobile-menu__footer {
+    padding-left: max(var(--sp-lg), env(safe-area-inset-left));
+  }
+
+  .sticky-cta {
+    padding-left: max(var(--container-pad), env(safe-area-inset-left));
+    padding-right: max(var(--container-pad), env(safe-area-inset-right));
+    padding-bottom: max(var(--sp-sm), env(safe-area-inset-bottom));
+  }
+
+  .container,
+  .container-narrow,
+  .container-wide,
+  .container-full {
+    padding-left: max(var(--container-pad), env(safe-area-inset-left));
+    padding-right: max(var(--container-pad), env(safe-area-inset-right));
+  }
+
+  .announcement-bar {
+    padding-left: max(var(--container-pad), env(safe-area-inset-left));
+    padding-right: max(var(--container-pad), env(safe-area-inset-right));
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 2: EXTRA SMALL PHONES (320px - 479px) — base styles already apply
+   ========================================================================== */
+
+/* Prevent any horizontal overflow at very small widths */
+@media (max-width: 479px) {
+
+  /* Tighter container padding */
+  :root {
+    --container-pad: 1rem;
+  }
+
+  /* Hide the tagline under the logo */
+  .site-logo__tagline {
+    display: none;
+  }
+
+  /* Smaller logo mark on tight screens */
+  .site-logo__mark {
+    height: 26px;
+    width: 5px;
+  }
+
+  .site-logo__name {
+    font-size: 1.0625rem;
+  }
+
+  /* Hide the "Buy the Book" CTA in the header (saves space) */
+  .nav-cta {
+    display: none;
+  }
+
+  /* Announcement bar — stack on tight screens */
+  .announcement-bar {
+    font-size: 0.6875rem;
+    padding-right: 2.5rem;
+  }
+
+  .announcement-bar__inner {
+    gap: var(--sp-xs);
+  }
+
+  .announcement-bar__badge {
+    font-size: 0.5625rem;
+  }
+
+  /* Hero typography compresses */
+  h1, .h1, .display {
+    font-size: clamp(2rem, 7vw, 2.5rem);
+    line-height: 1.1;
+  }
+
+  /* Button groups stack */
+  .btn-group {
+    width: 100%;
+  }
+
+  .btn-group .btn {
+    width: 100%;
+  }
+
+  /* Proof points stack vertically on tight phones */
+  .proof-points {
+    gap: var(--sp-md);
+  }
+
+  .proof-point + .proof-point::before {
+    display: none;
+  }
+
+  /* Stats row — allow wrapping, remove dividers */
+  .stats-row {
+    gap: var(--sp-md);
+  }
+
+  .stats-row--divided .stat + .stat {
+    border-left: none;
+    border-top: 1px solid var(--gray-200);
+    padding-top: var(--sp-md);
+    margin-top: var(--sp-xs);
+    width: 100%;
+  }
+
+  .band-navy .stats-row--divided .stat + .stat {
+    border-top-color: rgba(255,255,255,0.1);
+  }
+
+  /* Review cards — compact padding */
+  .review-card {
+    padding: var(--sp-md);
+  }
+
+  /* Format cards — reduced padding */
+  .format-card {
+    padding: var(--sp-lg) var(--sp-md);
+  }
+
+  /* Pullquote smaller on tight phones */
+  .pullquote__text {
+    font-size: var(--fs-lg);
+  }
+
+  .pullquote-hero__text {
+    font-size: var(--fs-xl);
+  }
+
+  /* Timeline — reduce left offset */
+  .timeline {
+    padding-left: var(--sp-lg);
+  }
+
+  .timeline__dot {
+    left: calc(var(--sp-lg) * -1);
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Table — allow horizontal scroll */
+  .table-wrap {
+    border-radius: var(--radius-md);
+  }
+
+  .table-kv th {
+    width: 40%;
+  }
+
+  /* Lightbox nav arrows closer to edges */
+  .lightbox__nav--prev {
+    left: var(--sp-xs);
+  }
+
+  .lightbox__nav--next {
+    right: var(--sp-xs);
+  }
+
+  /* Chapter navigator — not sticky on mobile */
+  .chapter-nav {
+    position: static;
+    max-height: none;
+  }
+
+  /* Sticky CTA — tighter spacing */
+  .sticky-cta__inner {
+    gap: var(--sp-xs);
+  }
+
+  .sticky-cta__text {
+    font-size: var(--fs-xs);
+  }
+
+  /* Image frame — reduce accent offset on small screens */
+  .img-frame__accent {
+    top: var(--sp-xs);
+    left: var(--sp-xs);
+  }
+
+  .img-frame--right .img-frame__accent {
+    right: calc(var(--sp-xs) * -1);
+    top: var(--sp-xs);
+  }
+
+  /* Floating pullquote — don't float on mobile */
+  .pullquote-inline {
+    float: none;
+    width: 100%;
+    margin: var(--sp-md) 0;
+  }
+
+  /* CTA with cover image — stack */
+  .cta-with-cover {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--sp-lg);
+  }
+
+  /* Form rows stack */
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Newsletter inline — stack button below input */
+  .newsletter-inline {
+    flex-direction: column;
+  }
+
+  .newsletter-inline .btn {
+    width: 100%;
+  }
+
+  /* Review card meta — allow wrap */
+  .review-card__meta {
+    font-size: 0.6875rem;
+  }
+
+  /* Section spacing compresses */
+  .section {
+    padding-block: var(--sp-2xl);
+  }
+
+  .section-lg {
+    padding-block: var(--sp-3xl);
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 3: LANDSCAPE PHONES (orientation + height constraint)
+   ========================================================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+  /* Mobile menu — scrollable, compressed */
+  .mobile-menu__header {
+    min-height: 56px;
+    padding-block: var(--sp-xs);
+  }
+
+  .mobile-menu__nav {
+    padding-block: var(--sp-xs);
+  }
+
+  .mobile-nav-link {
+    font-size: var(--fs-md);
+    padding-block: var(--sp-xs);
+  }
+
+  /* Hero padding reduces */
+  .page-hero {
+    padding-block: var(--sp-xl);
+  }
+
+  /* Reduce announcement bar presence */
+  .announcement-bar {
+    display: none;
+  }
+
+  /* Reduce header height */
+  :root {
+    --header-height: 60px;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 4: LARGE PHONES (480px+)
+   ========================================================================== */
+
+@media (min-width: 480px) {
+
+  /* Show the Buy the Book CTA button but smaller */
+  .nav-cta {
+    display: inline-flex;
+  }
+
+  .nav-cta .btn {
+    padding: 0.55em 1em;
+    font-size: var(--fs-xs);
+    min-height: 40px;
+  }
+
+  /* Proof points — reintroduce dividers */
+  .proof-point + .proof-point::before {
+    display: block;
+  }
+
+  /* Stats row — restore horizontal dividers */
+  .stats-row--divided .stat + .stat {
+    border-left: 1px solid var(--gray-200);
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+    width: auto;
+  }
+
+  .band-navy .stats-row--divided .stat + .stat {
+    border-left-color: rgba(255,255,255,0.12);
+    border-top-color: transparent;
+  }
+
+  /* Grid 2 columns at 480+ */
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Button groups go horizontal */
+  .btn-group {
+    width: auto;
+  }
+
+  .btn-group .btn {
+    width: auto;
+  }
+
+  /* Newsletter inline — restore horizontal */
+  .newsletter-inline {
+    flex-direction: row;
+  }
+
+  .newsletter-inline .btn {
+    width: auto;
+  }
+
+  /* Form rows restore horizontal */
+  .form-row {
+    flex-direction: row;
+    gap: var(--sp-md);
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 5: SMALL TABLETS (640px+)
+   ========================================================================== */
+
+@media (min-width: 640px) {
+
+  /* Grid 3 columns start showing */
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Footer grid becomes 2 columns */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Reader voices and review cards get breathing room */
+  .review-card {
+    padding: var(--sp-lg);
+  }
+
+  /* Chapter navigator still inline */
+  .chapter-nav {
+    position: static;
+  }
+
+  /* Hero gets more vertical space */
+  .page-hero {
+    padding-block: var(--sp-3xl);
+  }
+
+  /* Gallery minimum width grows */
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  /* Sticky CTA shows star rating alongside */
+  .sticky-cta__text .stars-inline {
+    display: inline-flex;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 6: TABLETS PORTRAIT (768px+)
+   ========================================================================== */
+
+@media (min-width: 768px) {
+
+  /* Grid 3 columns full */
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Grid 4 still 2x2 at tablet */
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 60/40 and 40/60 split into real asymmetric grids */
+  .grid-60-40 {
+    grid-template-columns: 3fr 2fr;
+    gap: var(--sp-2xl);
+  }
+
+  .grid-40-60 {
+    grid-template-columns: 2fr 3fr;
+    gap: var(--sp-2xl);
+  }
+
+  .grid-70-30 {
+    grid-template-columns: 7fr 3fr;
+    gap: var(--sp-2xl);
+  }
+
+  .grid-30-70 {
+    grid-template-columns: 3fr 7fr;
+    gap: var(--sp-2xl);
+  }
+
+  /* Pullquote inline — floating now works */
+  .pullquote-inline {
+    float: right;
+    width: 45%;
+    margin: var(--sp-2xs) 0 var(--sp-md) var(--sp-lg);
+  }
+
+  /* Chapter navigator sidebar styling (parent grid handles layout) */
+  .chapter-nav {
+    position: sticky;
+    top: calc(var(--header-height) + var(--sp-lg));
+  }
+
+  /* Hero stats row — proper horizontal layout */
+  .proof-points {
+    gap: var(--sp-xl);
+  }
+
+  /* Larger section padding */
+  .section {
+    padding-block: var(--sp-3xl);
+  }
+
+  .section-lg {
+    padding-block: var(--sp-4xl);
+  }
+
+  .section-xl {
+    padding-block: var(--sp-5xl);
+  }
+
+  /* CTA with cover image goes side by side */
+  .cta-with-cover {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  /* Trust strip gets more breathing room */
+  .trust-strip__inner {
+    gap: var(--sp-2xl);
+  }
+
+  /* Image frame larger offset */
+  .img-frame__accent {
+    top: var(--sp-md);
+    left: var(--sp-md);
+  }
+
+  .img-frame--right .img-frame__accent {
+    right: calc(var(--sp-md) * -1);
+    top: var(--sp-md);
+  }
+
+  /* Timeline — more generous spacing */
+  .timeline {
+    padding-left: var(--sp-2xl);
+  }
+
+  .timeline__dot {
+    left: calc(var(--sp-2xl) * -1);
+  }
+
+  /* Format cards grid */
+  .format-card {
+    padding: var(--sp-xl) var(--sp-lg);
+  }
+
+  /* Review card featured mode gets more padding */
+  .review-card--featured {
+    padding: var(--sp-2xl);
+  }
+
+  /* Gallery — larger min items */
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  /* Mobile menu — slightly wider */
+  .mobile-menu {
+    width: min(70vw, 420px);
+  }
+
+  /* Hide sticky CTA on tablets+ (desktop nav has Buy button already) */
+  .sticky-cta {
+    display: none;
+  }
+
+  /* Site header gets more interior padding */
+  :root {
+    --header-height: 80px;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 7: TABLETS LANDSCAPE / SMALL DESKTOPS (1024px+)
+   ========================================================================== */
+
+@media (min-width: 1024px) {
+
+  /* Desktop navigation visible */
+  .desktop-nav {
+    display: flex;
+  }
+
+  /* Hide hamburger */
+  .hamburger {
+    display: none;
+  }
+
+  /* Mobile menu completely hidden */
+  .mobile-menu,
+  .mobile-menu-overlay {
+    display: none !important;
+  }
+
+  /* Grid 4 full */
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Grid 5 */
+  .grid-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  /* Footer: 4-column layout */
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+    gap: var(--sp-2xl);
+  }
+
+  .footer-about {
+    max-width: none;
+  }
+
+  .footer-newsletter {
+    max-width: none;
+  }
+
+  /* Hero: more generous heights */
+  .page-hero {
+    padding-block: var(--sp-4xl);
+  }
+
+  /* Header interior spacing */
+  .site-header__inner {
+    gap: var(--sp-lg);
+  }
+
+  /* Nav CTA restores full size */
+  .nav-cta .btn {
+    padding: 0.65em 1.25em;
+    font-size: var(--fs-xs);
+    min-height: 44px;
+  }
+
+  /* Prose max-width increases */
+  .prose {
+    font-size: var(--fs-md);
+  }
+
+  /* Pullquote-hero large text */
+  .pullquote-hero__text {
+    font-size: var(--fs-3xl);
+  }
+
+  /* Container narrows for readability */
+  .container-narrow {
+    max-width: var(--container-narrow);
+  }
+
+  /* Hero split layouts (editorial 55/45) */
+  .hero-split {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--sp-2xl);
+    align-items: center;
+  }
+
+  /* Trust strip gets even more space */
+  .trust-strip__inner {
+    gap: var(--sp-3xl);
+  }
+
+  /* Larger stat numbers on desktop */
+  .stat__number {
+    font-size: var(--fs-4xl);
+  }
+
+  /* Image frame larger accent offset */
+  .img-frame__accent {
+    top: var(--sp-lg);
+    left: var(--sp-lg);
+  }
+
+  .img-frame--right .img-frame__accent {
+    right: calc(var(--sp-lg) * -1);
+    top: var(--sp-lg);
+  }
+
+  /* Chapter navigator stays sticky on desktop */
+  .chapter-nav {
+    position: sticky;
+    top: calc(var(--header-height) + var(--sp-lg));
+    max-height: calc(100vh - var(--header-height) - var(--sp-2xl));
+  }
+
+  /* Accordion button padding grows */
+  .acc-btn {
+    padding: var(--sp-md) var(--sp-xl);
+  }
+
+  .acc--tabbed .acc-btn {
+    padding-left: calc(var(--sp-xl) + 10px);
+  }
+
+  .acc-panel__inner {
+    padding: 0 var(--sp-xl) var(--sp-lg);
+  }
+
+  /* Format cards grid — 4 across on desktop (handled by grid-4 class) */
+
+  /* Larger CTA banner */
+  .cta-banner {
+    padding: var(--sp-3xl) var(--sp-xl);
+  }
+
+  /* Gallery grid wider minimums */
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+
+  /* Review featured card gets even larger */
+  .review-card--featured {
+    padding: var(--sp-2xl) var(--sp-3xl);
+  }
+
+  /* Larger container padding at desktop */
+  :root {
+    --container-pad: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 8: DESKTOPS (1280px+)
+   ========================================================================== */
+
+@media (min-width: 1280px) {
+
+  /* Tab rail becomes visible on the right edge */
+  .tab-rail {
+    display: flex;
+  }
+
+  /* Nav items get more spacing */
+  .desktop-nav {
+    gap: var(--sp-xs);
+  }
+
+  /* Header: comfortable padding */
+  :root {
+    --header-height: 88px;
+  }
+
+  /* Section padding at its most generous */
+  .section-lg {
+    padding-block: var(--sp-5xl);
+  }
+
+  /* Grid 60/40 wider gap */
+  .grid-60-40,
+  .grid-40-60 {
+    gap: var(--sp-3xl);
+  }
+
+  /* Hero split — more asymmetric */
+  .hero-split {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--sp-3xl);
+  }
+
+  /* Display text at full size */
+  .display {
+    font-size: clamp(4.5rem, 3rem + 4vw, 7rem);
+  }
+
+  /* Pullquote-hero larger */
+  .pullquote-hero__text {
+    font-size: var(--fs-4xl);
+    max-width: 36ch;
+  }
+
+  /* Chapter navigator — slightly wider */
+  .chapter-nav {
+    min-width: 220px;
+  }
+
+  /* Format cards — 5 columns max */
+  .grid-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  /* Larger container */
+  .container-wide {
+    max-width: 1500px;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 9: LARGE DESKTOPS (1536px+)
+   ========================================================================== */
+
+@media (min-width: 1536px) {
+
+  /* Max container width increases */
+  :root {
+    --container-max: 1280px;
+    --container-wide: 1600px;
+  }
+
+  /* Even more generous section spacing */
+  .section-xl {
+    padding-block: 10rem;
+  }
+
+  /* Tab rail — can expand slightly */
+  .tab-rail {
+    gap: 4px;
+  }
+
+  .tab-rail__item {
+    padding: var(--sp-xs);
+  }
+
+  /* Hero display text max */
+  .display {
+    font-size: 7.5rem;
+  }
+
+  /* Image frame can have larger accents */
+  .img-frame__accent {
+    top: var(--sp-xl);
+    left: var(--sp-xl);
+  }
+
+  /* Larger pullquote */
+  .pullquote-hero__text {
+    font-size: 4.5rem;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 10: EXTRA LARGE SCREENS (1920px+)
+   ========================================================================== */
+
+@media (min-width: 1920px) {
+
+  /* Keep container contained — don't let it spread too far */
+  :root {
+    --container-max: 1320px;
+    --container-wide: 1700px;
+  }
+
+  /* Section spacing scales with screen */
+  .section-lg {
+    padding-block: 9rem;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 11: COMPONENT-SPECIFIC RESPONSIVE OVERRIDES
+   Granular adjustments that span multiple components.
+   ========================================================================== */
+
+/* ---- Hero image + text layout ---- */
+@media (max-width: 767px) {
+  .hero-split {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-xl);
+  }
+
+  .hero-split__image {
+    order: 2;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .hero-split__content {
+    order: 1;
+    text-align: center;
+  }
+
+  .hero-split__content .proof-points {
+    justify-content: center;
+  }
+
+  .hero-split__content .btn-group {
+    justify-content: center;
+  }
+}
+
+/* ---- Accordion: full-width content on mobile ---- */
+@media (max-width: 639px) {
+  .acc-btn {
+    padding: var(--sp-sm) var(--sp-md);
+    font-size: var(--fs-base);
+  }
+
+  .acc--tabbed .acc-btn {
+    padding-left: calc(var(--sp-md) + 8px);
+  }
+
+  .acc-panel__inner {
+    padding: 0 var(--sp-md) var(--sp-md);
+    font-size: var(--fs-sm);
+  }
+
+  .acc-btn__chapter-num {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: var(--fs-xs);
+  }
+}
+
+/* ---- Review card grid behavior ---- */
+@media (max-width: 639px) {
+  .review-card {
+    gap: var(--sp-xs);
+  }
+
+  .review-card__excerpt {
+    font-size: var(--fs-sm);
+  }
+
+  .review-card__meta {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .review-card--featured {
+    padding: var(--sp-lg);
+  }
+
+  .review-card--featured .review-card__excerpt {
+    font-size: var(--fs-base);
+  }
+}
+
+/* ---- Format card tweaks ---- */
+@media (max-width: 639px) {
+  .format-card {
+    padding: var(--sp-lg) var(--sp-md);
+    gap: var(--sp-xs);
+  }
+
+  .format-card__icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .format-card__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .format-card__title {
+    font-size: var(--fs-md);
+  }
+
+  .format-card__desc {
+    font-size: var(--fs-xs);
+  }
+}
+
+/* ---- Podcast card on mobile ---- */
+@media (max-width: 479px) {
+  .podcast-card {
+    padding: var(--sp-md);
+    gap: var(--sp-sm);
+  }
+
+  .podcast-card__icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .podcast-card__title {
+    font-size: var(--fs-sm);
+  }
+}
+
+/* ---- Appearance card on mobile ---- */
+@media (max-width: 479px) {
+  .appearance-card {
+    padding: var(--sp-md);
+  }
+}
+
+/* ---- Situation card on mobile ---- */
+@media (max-width: 479px) {
+  .situation-card {
+    padding: var(--sp-md);
+    gap: var(--sp-sm);
+  }
+
+  .situation-card__icon {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ---- Table key-value on mobile ---- */
+@media (max-width: 479px) {
+  .table-kv th,
+  .table-kv td {
+    padding: var(--sp-xs) var(--sp-sm);
+    font-size: var(--fs-xs);
+    display: block;
+    width: 100%;
+  }
+
+  .table-kv th {
+    background-color: var(--ice);
+    border-bottom: none;
+    padding-bottom: 2px;
+  }
+
+  .table-kv td {
+    padding-top: 2px;
+    border-bottom: 1px solid var(--gray-100);
+    padding-bottom: var(--sp-sm);
+  }
+
+  .table-kv tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+/* ---- CTA buttons stack on mobile ---- */
+@media (max-width: 479px) {
+  .cta-banner__buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .cta-banner__buttons .btn {
+    width: 100%;
+  }
+}
+
+/* ---- Trust strip items wrap more tightly on mobile ---- */
+@media (max-width: 479px) {
+  .trust-strip {
+    padding: var(--sp-md) 0;
+  }
+
+  .trust-strip__inner {
+    gap: var(--sp-md);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .trust-strip__item {
+    font-size: var(--fs-xs);
+  }
+
+  .trust-strip__item svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* ---- Gallery minimum on tiny screens ---- */
+@media (max-width: 479px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--sp-xs);
+  }
+}
+
+@media (min-width: 480px) and (max-width: 639px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-sm);
+  }
+}
+
+/* ---- Pullquote hero stacking on mobile ---- */
+@media (max-width: 639px) {
+  .pullquote-hero {
+    padding: var(--sp-xl) 0;
+  }
+
+  .pullquote::before {
+    font-size: 3rem;
+  }
+}
+
+/* ---- Rating bars on mobile — tighter ---- */
+@media (max-width: 479px) {
+  .rating-bar__label {
+    width: 3em;
+    font-size: 0.6875rem;
+  }
+
+  .rating-bar__track {
+    height: 10px;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 12: HEADER AND NAVIGATION RESPONSIVE
+   ========================================================================== */
+
+/* Mobile menu width on tiny screens */
+@media (max-width: 359px) {
+  .mobile-menu {
+    width: 95vw;
+  }
+}
+
+/* Mobile menu wider on larger phones */
+@media (min-width: 480px) and (max-width: 1023px) {
+  .mobile-menu {
+    width: min(80vw, 420px);
+  }
+}
+
+/* Desktop nav font size tweak on medium desktops */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .nav-link {
+    font-size: 0.8125rem;
+    padding: var(--sp-xs) var(--sp-sm);
+  }
+
+  .desktop-nav {
+    gap: 0;
+  }
+}
+
+/* Hide less important nav items on medium screens if needed */
+@media (min-width: 1024px) and (max-width: 1180px) {
+  /* All items still visible but compressed. If overflow issues occur,
+     consider hiding "Speaking" or "FAQ" and moving them to the mobile menu
+     via a utility class in HTML. */
+}
+
+/* Announcement bar: wrap gracefully */
+@media (max-width: 639px) {
+  .announcement-bar__inner {
+    font-size: 0.6875rem;
+    gap: 6px;
+  }
+}
+
+/* Tab rail — adjust position on medium desktops to avoid overlap */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .tab-rail {
+    right: 0;
+  }
+
+  .tab-rail__label {
+    display: none;
+  }
+
+  .tab-rail__item:hover .tab-rail__label {
+    display: inline;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 13: FOOTER RESPONSIVE
+   ========================================================================== */
+
+/* Footer bottom bar stacks on small screens */
+@media (max-width: 479px) {
+  .footer-bottom__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-sm);
+  }
+
+  .footer-legal {
+    flex-direction: column;
+    gap: var(--sp-xs);
+  }
+
+  .footer-main {
+    padding-top: var(--sp-2xl);
+    padding-bottom: var(--sp-xl);
+  }
+}
+
+/* Footer at tablet: 2 column grid, newsletter spans full width */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-xl);
+  }
+
+  .footer-about,
+  .footer-newsletter {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+
+  .footer-newsletter {
+    padding-top: var(--sp-lg);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+}
+
+/* Footer newsletter button on mobile */
+@media (max-width: 479px) {
+  .footer-newsletter .newsletter-inline {
+    flex-direction: row;
+  }
+
+  .footer-newsletter .form-input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .footer-newsletter .btn {
+    width: auto;
+    flex-shrink: 0;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 14: PAGE HERO RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 639px) {
+  .page-hero {
+    padding-block: var(--sp-2xl);
+  }
+
+  .page-hero__pattern::before {
+    width: 400px;
+    height: 400px;
+    border-width: 40px;
+  }
+
+  .page-hero__pattern::after {
+    width: 240px;
+    height: 240px;
+    border-width: 24px;
+  }
+
+  .page-hero__breadcrumb {
+    font-size: 0.6875rem;
+    margin-bottom: var(--sp-sm);
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-hero {
+    padding-block: var(--sp-4xl);
+  }
+
+  .page-hero__pattern::before {
+    width: 800px;
+    height: 800px;
+    border-width: 70px;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 15: VIDEO POSTER RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 479px) {
+  .video-poster__play {
+    width: 52px;
+    height: 52px;
+  }
+
+  .video-poster__play svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .video-poster__label {
+    bottom: var(--sp-xs);
+    left: var(--sp-xs);
+    font-size: 0.625rem;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 16: LIGHTBOX RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 639px) {
+  .lightbox {
+    padding: var(--sp-sm);
+  }
+
+  .lightbox__img {
+    max-width: 95vw;
+    max-height: 75vh;
+  }
+
+  .lightbox__close {
+    top: var(--sp-xs);
+    right: var(--sp-xs);
+    width: 40px;
+    height: 40px;
+  }
+
+  .lightbox__nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .lightbox__nav--prev {
+    left: var(--sp-xs);
+  }
+
+  .lightbox__nav--next {
+    right: var(--sp-xs);
+  }
+
+  .lightbox__caption {
+    bottom: var(--sp-sm);
+    font-size: var(--fs-xs);
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 17: FORM RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 479px) {
+  .form-input,
+  .form-textarea,
+  .form-select {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    padding: 0.65em 0.9em;
+  }
+
+  .form-group {
+    margin-bottom: var(--sp-sm);
+  }
+
+  .form-check {
+    gap: var(--sp-2xs);
+  }
+}
+
+@media (min-width: 768px) {
+  .form-group {
+    margin-bottom: var(--sp-md);
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 18: UTILITY RESPONSIVE OVERRIDES
+   ========================================================================== */
+
+/* Hide on mobile, show on desktop */
+.hide-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hide-mobile {
+    display: initial;
+  }
+}
+
+/* Show on mobile, hide on desktop */
+.show-mobile {
+  display: initial;
+}
+
+@media (min-width: 768px) {
+  .show-mobile {
+    display: none;
+  }
+}
+
+/* Hide on tablet and up */
+.hide-tablet {
+  display: initial;
+}
+
+@media (min-width: 768px) {
+  .hide-tablet {
+    display: none;
+  }
+}
+
+/* Hide only on mobile */
+.hide-only-mobile {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .hide-only-mobile {
+    display: initial;
+  }
+}
+
+/* Text alignment responsive */
+@media (max-width: 639px) {
+  .text-center-mobile {
+    text-align: center;
+  }
+
+  .text-left-mobile {
+    text-align: left;
+  }
+}
+
+@media (min-width: 768px) {
+  .text-center-tablet {
+    text-align: center;
+  }
+
+  .text-left-tablet {
+    text-align: left;
+  }
+}
+
+/* Full width on mobile */
+@media (max-width: 479px) {
+  .full-mobile {
+    width: 100%;
+  }
+
+  .full-mobile .btn {
+    width: 100%;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 19: TIMELINE RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 479px) {
+  .timeline__item {
+    padding-bottom: var(--sp-lg);
+  }
+
+  .timeline__title {
+    font-size: var(--fs-base);
+  }
+
+  .timeline__desc {
+    font-size: var(--fs-xs);
+  }
+
+  .timeline__year {
+    font-size: var(--fs-xs);
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 20: STICKY CTA RESPONSIVE
+   Only shows on mobile (below 768px).
+   ========================================================================== */
+
+@media (min-width: 768px) {
+  .sticky-cta {
+    display: none !important;
+  }
+}
+
+/* Give body extra padding so sticky CTA doesn't cover content */
+@media (max-width: 767px) {
+  body.has-sticky-cta {
+    padding-bottom: 80px;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 21: PROSE / LONG-FORM RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 639px) {
+  .prose {
+    font-size: var(--fs-base);
+  }
+
+  .prose h2 {
+    font-size: var(--fs-xl);
+  }
+
+  .prose h3 {
+    font-size: var(--fs-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .prose {
+    font-size: var(--fs-md);
+    line-height: var(--lh-relaxed);
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 22: CHAPTER NAVIGATOR AS ACCORDION ON MOBILE
+   The chapters page has a sticky side nav on desktop and a collapsed
+   accordion-style selector on mobile.
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  .chapter-nav {
+    position: static;
+    max-height: none;
+    margin-bottom: var(--sp-lg);
+    padding: var(--sp-md);
+    background-color: var(--ice);
+    border-radius: var(--radius-lg);
+  }
+
+  .chapter-nav__title {
+    font-size: var(--fs-xs);
+    margin-bottom: var(--sp-xs);
+  }
+
+  .chapter-nav__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 4px;
+  }
+
+  .chapter-nav__link {
+    font-size: var(--fs-xs);
+    padding: var(--sp-xs);
+    background-color: var(--white);
+  }
+
+  .chapter-nav__link.is-active {
+    padding-left: var(--sp-xs);
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 23: SOCIAL ICONS ON SMALL SCREENS
+   ========================================================================== */
+
+@media (max-width: 479px) {
+  .social-row {
+    gap: var(--sp-xs);
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .social-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .social-link-labeled {
+    font-size: var(--fs-xs);
+    padding: var(--sp-2xs) var(--sp-sm);
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 24: TYPOGRAPHY FINE-TUNING AT KEY WIDTHS
+   ========================================================================== */
+
+/* At very small widths, keep headings from overflowing */
+@media (max-width: 359px) {
+  h1, .h1 {
+    font-size: 1.75rem;
+    letter-spacing: -0.015em;
+  }
+
+  h2, .h2 {
+    font-size: 1.5rem;
+  }
+
+  h3, .h3 {
+    font-size: 1.25rem;
+  }
+
+  .display {
+    font-size: 2rem;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+}
+
+/* Allow long words to break on mobile */
+@media (max-width: 479px) {
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6,
+  .display {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 25: HIGH-DENSITY DISPLAYS (Retina)
+   Subtle refinements for crisper rendering.
+   ========================================================================== */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Thinner borders on retina */
+  .card,
+  .panel,
+  .review-card,
+  .format-card {
+    border-width: 1px;
+  }
+
+  /* Finer hairlines */
+  .site-header.is-scrolled {
+    border-bottom-width: 1px;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 26: FORCED COLORS / HIGH CONTRAST MODE
+   Windows High Contrast and similar settings.
+   ========================================================================== */
+
+@media (forced-colors: active) {
+  .btn {
+    border: 2px solid currentColor;
+  }
+
+  .card,
+  .panel,
+  .review-card,
+  .format-card,
+  .acc {
+    border: 1px solid currentColor;
+  }
+
+  .tab-heading::before,
+  .site-logo__mark,
+  .footer-about__logo-mark {
+    background-color: Highlight;
+    forced-color-adjust: none;
+  }
+
+  .nav-link.is-active::after {
+    background-color: Highlight;
+    forced-color-adjust: none;
+  }
+
+  .site-header.is-scrolled {
+    border-bottom-color: currentColor;
+  }
+
+  .form-input:focus,
+  .form-textarea:focus,
+  .form-select:focus {
+    outline: 2px solid Highlight;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 27: DARK MODE PREFERENCE (future-ready)
+   Not fully supported yet, but a hook is in place.
+   Gerald can opt in later by uncommenting these overrides.
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  /* Reserved for future dark mode implementation. */
+  /* Keep site in light mode for now to match book cover aesthetic. */
+}
+
+
+/* ==========================================================================
+   SECTION 28: PREFERS-REDUCED-MOTION
+   Respect user motion preferences. Disable or minimize all animations.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Reveal animations show immediately */
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Disable hover transforms */
+  .card:hover,
+  .review-card:hover,
+  .format-card:hover,
+  .podcast-card:hover,
+  .situation-card:hover,
+  .appearance-card:hover,
+  .footer-social .social-icon:hover,
+  .social-icon:hover,
+  .book-cover:hover,
+  .btn:active,
+  .tab-list__item:hover .tab-list__number,
+  .img-frame:hover .img-frame__accent,
+  .gallery__item:hover img,
+  .timeline__item:hover .timeline__dot,
+  .site-logo:hover .site-logo__mark {
+    transform: none !important;
+  }
+
+  /* Button shimmer effect disabled */
+  .btn::after {
+    display: none;
+  }
+
+  /* Scroll behavior instant */
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Lightbox opens instantly */
+  .lightbox,
+  .lightbox__img {
+    transition: none !important;
+  }
+
+  /* Hamburger stays as-is */
+  .hamburger__line {
+    transition: none !important;
+  }
+
+  /* Mobile menu slides without animation */
+  .mobile-menu,
+  .mobile-menu-overlay {
+    transition: none !important;
+  }
+
+  /* Accordion opens/closes instantly */
+  .acc-panel,
+  .acc-btn__icon {
+    transition: none !important;
+  }
+
+  /* Form field focus — keep ring but no transition */
+  .form-input,
+  .form-textarea,
+  .form-select {
+    transition: none !important;
+  }
+
+  /* Nav link hover underline — no animation */
+  .nav-link:not(.is-active)::after {
+    transition: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 29: PRINT-FRIENDLY RESPONSIVE
+   Already in style.css @media print — this is a safety net.
+   ========================================================================== */
+
+@media print {
+
+  /* Make all sections visible on paper */
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* No sticky elements on paper */
+  .site-header,
+  .chapter-nav,
+  .tab-rail,
+  .sticky-cta {
+    position: static !important;
+  }
+
+  /* Grid becomes block */
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-5,
+  .grid-60-40,
+  .grid-40-60,
+  .footer-grid,
+  .gallery {
+    display: block !important;
+  }
+
+  .grid-2 > *,
+  .grid-3 > *,
+  .grid-4 > *,
+  .grid-5 > *,
+  .grid-60-40 > *,
+  .grid-40-60 > *,
+  .footer-grid > *,
+  .gallery > * {
+    margin-bottom: 1em;
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 30: PREVENT HORIZONTAL SCROLL (safety net)
+   Final overflow fix at any width.
+   ========================================================================== */
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+iframe,
+table,
+.table-wrap > *,
+.card,
+.panel,
+.review-card,
+.format-card {
+  max-width: 100%;
+}
+
+/* Containers never exceed viewport */
+.container,
+.container-narrow,
+.container-wide,
+.container-full {
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: var(--container-max);
+  }
+
+  .container-narrow {
+    max-width: var(--container-narrow);
+  }
+
+  .container-wide {
+    max-width: var(--container-wide);
+  }
+}
+
+
+/* ==========================================================================
+   SECTION 31: ANIMATION KEYFRAMES
+   Reusable keyframe animations invoked by other classes.
+   ========================================================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Utility animation classes */
+.animate-fade-in {
+  animation: fadeIn var(--duration-slow) var(--ease-out) both;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--duration-slow) var(--ease-out) both;
+}
+
+.animate-slide-right {
+  animation: slideInRight var(--duration-slow) var(--ease-out) both;
+}
+
+.animate-slide-left {
+  animation: slideInLeft var(--duration-slow) var(--ease-out) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--duration-slow) var(--ease-spring) both;
+}
+
+.animate-pulse {
+  animation: pulse 2s var(--ease-in-out) infinite;
+}
+
+.animate-float {
+  animation: float 3s var(--ease-in-out) infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Animation delay utilities */
+.anim-delay-1 { animation-delay: 100ms; }
+.anim-delay-2 { animation-delay: 200ms; }
+.anim-delay-3 { animation-delay: 300ms; }
+.anim-delay-4 { animation-delay: 400ms; }
+.anim-delay-5 { animation-delay: 500ms; }
+
+/* Reduce motion override for animation utilities */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-slide-right,
+  .animate-slide-left,
+  .animate-scale-in,
+  .animate-pulse,
+  .animate-float {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

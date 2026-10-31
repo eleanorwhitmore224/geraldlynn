@@ -1,0 +1,272 @@
+/* ==================================================================
+   Gerald Lynn, C.M.R. - Print Stylesheet
+   File: css/print.css
+
+   Loaded with:  <link rel="stylesheet" href="../css/print.css" media="print">
+
+   Only applies during printing or "Print to PDF". The media="print"
+   attribute keeps browsers from even downloading it during normal use.
+   ================================================================== */
+
+@media print {
+
+  /* ---------------------------------------------------------------
+     Page setup
+     --------------------------------------------------------------- */
+  @page {
+    margin: 0.75in 0.75in 0.9in 0.75in;
+  }
+
+  /* ---------------------------------------------------------------
+     Reset backgrounds to save ink
+     --------------------------------------------------------------- */
+  html,
+  body,
+  .page-hero,
+  .page-hero--navy,
+  .section,
+  .section--cream,
+  .section--ice,
+  .panel,
+  .panel--navy,
+  .panel--ice,
+  .panel--gold,
+  .panel--shadow,
+  .page-hero__pattern {
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* ---------------------------------------------------------------
+     Hide non-essential chrome
+     --------------------------------------------------------------- */
+  .site-header,
+  .site-footer,
+  .back-to-top,
+  .reading-progress,
+  .skip-link,
+  .nav,
+  .header__cta,
+  .footer-newsletter,
+  .footer-social,
+  .footer-links,
+  .footer-buy-links,
+  .footer-disclaimer,
+  .footer-bottom,
+  .newsletter-inline,
+  .social-row,
+  .social-icon,
+  .page-hero__breadcrumb,
+  .page-hero__pattern,
+  form,
+  .reveal,
+  [data-form],
+  .hp-field-wrap,
+  .form-hp,
+  button,
+  .btn,
+  .hero__scroll,
+  .error-search,
+  .thanks-countdown,
+  .error-hero__code,
+  .error-hero__actions,
+  .error-link-card__icon {
+    display: none !important;
+  }
+
+  /* ---------------------------------------------------------------
+     Typography
+     --------------------------------------------------------------- */
+  body {
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 11pt !important;
+    line-height: 1.55 !important;
+    color: #000000 !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: Georgia, "Times New Roman", serif !important;
+    color: #000000 !important;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  h1 { font-size: 22pt; margin: 0 0 0.5em; }
+  h2 { font-size: 16pt; margin: 1.5em 0 0.5em; }
+  h3 { font-size: 13pt; margin: 1.2em 0 0.4em; }
+  h4, h5, h6 { font-size: 11pt; margin: 1em 0 0.3em; }
+
+  p, li, blockquote, dd, dt {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* ---------------------------------------------------------------
+     Links: show the destination in parentheses
+     --------------------------------------------------------------- */
+  a {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+
+  /* External links: show the full URL after the link text */
+  a[href^="http://"]::after,
+  a[href^="https://"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #444444;
+    word-break: break-all;
+    font-weight: normal;
+  }
+
+  /* Internal links: shorten to authorgeraldlynn.com path */
+  a[href^="/"]::after {
+    content: " (authorgeraldlynn.com" attr(href) ")";
+    font-size: 9pt;
+    color: #444444;
+    word-break: break-all;
+    font-weight: normal;
+  }
+
+  /* Skip decorative and short links */
+  a[href^="#"]::after,
+  a[href^="mailto:"]::after,
+  a[href^="tel:"]::after,
+  a[role="button"]::after,
+  .footer-back-to-top::after {
+    content: "" !important;
+  }
+
+  /* Do not print decorative links inline with their icon SVG */
+  a svg {
+    display: none !important;
+  }
+
+  /* ---------------------------------------------------------------
+     Layout
+     --------------------------------------------------------------- */
+  .container,
+  .container--narrow {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .grid-60-40,
+  .grid-3,
+  .grid-4,
+  .grid-2,
+  .footer-grid,
+  .next-steps,
+  .error-links {
+    display: block !important;
+  }
+
+  .page-hero {
+    padding: 0 0 1em !important;
+  }
+
+  .section {
+    padding: 1em 0 !important;
+  }
+
+  .panel {
+    padding: 0.5em 0 !important;
+  }
+
+  /* ---------------------------------------------------------------
+     Page breaks
+     --------------------------------------------------------------- */
+  section {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+
+  article,
+  blockquote {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* ---------------------------------------------------------------
+     Images
+     --------------------------------------------------------------- */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ---------------------------------------------------------------
+     FAQ accordions: force-open all answers when printing
+     --------------------------------------------------------------- */
+  .faq-item,
+  .accordion__item,
+  details {
+    display: block !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .faq-item__answer,
+  .accordion__panel,
+  .accordion__content {
+    display: block !important;
+    max-height: none !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* ---------------------------------------------------------------
+     Tables
+     --------------------------------------------------------------- */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  th, td {
+    border: 1px solid #000000 !important;
+    padding: 0.4em 0.6em !important;
+    color: #000000 !important;
+  }
+
+  /* ---------------------------------------------------------------
+     Images that should still print
+     (the book cover is useful on the About page when printed)
+     --------------------------------------------------------------- */
+  .book-cover,
+  .book-cover img,
+  .author-photo,
+  .author-photo img {
+    display: block !important;
+    max-width: 3in !important;
+    margin: 0.5em auto !important;
+  }
+
+  /* ---------------------------------------------------------------
+     "Printed from" footer
+     Adds a small note at the bottom of every printed page.
+     --------------------------------------------------------------- */
+  body::after {
+    content: "Printed from authorgeraldlynn.com. (c) Gerald Lynn, C.M.R.";
+    display: block;
+    margin-top: 2em;
+    padding-top: 0.5em;
+    border-top: 1px solid #cccccc;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 8.5pt;
+    color: #666666;
+    text-align: center;
+  }
+
+}

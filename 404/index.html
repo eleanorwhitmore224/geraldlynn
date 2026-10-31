@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- ==================================================================
+       Gerald Lynn, C.M.R. - 404 Not Found
+       File: 404.html  (ROOT LEVEL)
+       Note: This page is served for any missing URL. All asset and link
+       paths are ROOT-RELATIVE (start with /) so they resolve correctly
+       no matter which URL triggered the error.
+       ================================================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Primary Meta -->
+  <title>Page Not Found | Gerald Lynn, C.M.R.</title>
+  <meta name="description" content="The page you were looking for could not be found. Use the links below to get back to the book, about Gerald, or the contact page.">
+  <meta name="author" content="Gerald Lynn, C.M.R.">
+  <meta name="robots" content="noindex, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Page Not Found | Gerald Lynn, C.M.R.">
+  <meta property="og:description" content="The page you were looking for could not be found.">
+  <meta property="og:url" content="https://authorgeraldlynn.com/404.html">
+  <meta property="og:site_name" content="Gerald Lynn, C.M.R.">
+  <!-- TODO: Replace with actual OG image once Gerald provides one -->
+  <meta property="og:image" content="https://authorgeraldlynn.com/assets/images/book-cover-front-800w.jpg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Page Not Found | Gerald Lynn, C.M.R.">
+  <meta name="twitter:description" content="The page you were looking for could not be found.">
+  <!-- TODO: Replace with actual Twitter image -->
+  <meta name="twitter:image" content="https://authorgeraldlynn.com/assets/images/book-cover-front-800w.jpg">
+
+  <!-- Favicon (TODO: Gerald to provide favicon files) -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Fonts: Bricolage Grotesque + Instrument Sans -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Stylesheets (ROOT-RELATIVE) -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+
+  <!-- Optional: Page-specific polish for the 404 layout -->
+  <style>
+    /* Kept minimal and scoped so it does not leak into other pages. */
+    .error-hero {
+      position: relative;
+      padding: var(--sp-4xl, 6rem) 0 var(--sp-3xl, 4rem);
+      overflow: hidden;
+    }
+    .error-hero__code {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 700;
+      font-size: clamp(6rem, 22vw, 14rem);
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      opacity: 0.08;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      pointer-events: none;
+    }
+    .error-hero__inner {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .error-hero__icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto var(--sp-lg, 1.5rem);
+      color: var(--gold-light, #e8c98a);
+    }
+    .error-hero__title {
+      color: var(--white);
+      margin-bottom: var(--sp-md, 1rem);
+    }
+    .error-hero__text {
+      color: var(--text-on-navy, rgba(255,255,255,0.82));
+      font-size: var(--fs-lg, 1.125rem);
+      line-height: 1.65;
+      margin-bottom: var(--sp-xl, 2rem);
+    }
+    .error-hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-sm, 0.75rem);
+      justify-content: center;
+    }
+    .error-search {
+      margin-top: var(--sp-2xl, 3rem);
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+    .error-search__label {
+      display: block;
+      color: var(--white);
+      font-size: var(--fs-sm, 0.875rem);
+      font-weight: 700;
+      margin-bottom: var(--sp-xs, 0.5rem);
+      letter-spacing: 0.02em;
+    }
+    .error-search__form {
+      display: flex;
+      gap: var(--sp-xs, 0.5rem);
+    }
+    .error-search__input {
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md, 8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      font-family: inherit;
+      font-size: var(--fs-base, 1rem);
+    }
+    .error-search__input::placeholder {
+      color: rgba(255,255,255,0.55);
+    }
+    .error-search__input:focus {
+      outline: 2px solid var(--gold-light, #e8c98a);
+      outline-offset: 2px;
+      background: rgba(255,255,255,0.14);
+    }
+    .error-search__note {
+      margin-top: var(--sp-xs, 0.5rem);
+      font-size: var(--fs-xs, 0.75rem);
+      color: rgba(255,255,255,0.55);
+    }
+    .error-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--sp-md, 1rem);
+    }
+    .error-link-card {
+      display: block;
+      height: 100%;
+      padding: var(--sp-lg, 1.5rem);
+      background: var(--white, #fff);
+      border: 1px solid var(--gray-200, #e5e5e5);
+      border-radius: var(--radius-lg, 12px);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .error-link-card:hover,
+    .error-link-card:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border-color: var(--forest, #2f5d50);
+      text-decoration: none;
+    }
+    .error-link-card__icon {
+      width: 32px;
+      height: 32px;
+      color: var(--forest, #2f5d50);
+      margin-bottom: var(--sp-sm, 0.75rem);
+    }
+    .error-link-card__title {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 700;
+      font-size: var(--fs-lg, 1.125rem);
+      color: var(--navy, #12263a);
+      margin-bottom: var(--sp-xs, 0.5rem);
+    }
+    .error-link-card__desc {
+      font-size: var(--fs-sm, 0.875rem);
+      color: var(--text-secondary, #4a5568);
+      line-height: 1.55;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body class="page-404">
+
+  <!-- Skip to main content (accessibility) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ================================================================
+       SITE HEADER (ROOT-RELATIVE LINKS)
+       ================================================================ -->
+  <header class="site-header" role="banner">
+    <div class="header__inner">
+
+      <!-- Logo / Wordmark -->
+      <a href="/index.html" class="header__logo" aria-label="Gerald Lynn, C.M.R., homepage">
+        <span class="header__wordmark">Gerald Lynn, <abbr title="Certified Medical Representative">C.M.R.</abbr></span>
+      </a>
+
+      <!-- Main Navigation -->
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu" type="button">
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+        </button>
+
+        <ul class="nav__list" id="nav-menu" role="list">
+          <li class="nav__item"><a href="/index.html" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="/about/index.html" class="nav__link">The Book</a></li>
+          <li class="nav__item"><a href="/author/index.html" class="nav__link">About Gerald</a></li>
+          <li class="nav__item"><a href="/chapters/index.html" class="nav__link">Chapters</a></li>
+          <li class="nav__item"><a href="/reviews/index.html" class="nav__link">Reviews</a></li>
+          <li class="nav__item"><a href="/speaking/index.html" class="nav__link">Speaking</a></li>
+          <li class="nav__item"><a href="/faq/index.html" class="nav__link">FAQ</a></li>
+          <li class="nav__item"><a href="/contact/index.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Buy CTA -->
+      <a href="https://www.amazon.com/dp/B0FXCZVW2J" class="btn btn--gold btn--sm header__cta" data-config="kindleUrl">
+        Buy the Book
+      </a>
+
+    </div>
+  </header>
+
+  <!-- ================================================================
+       MAIN CONTENT
+       ================================================================ -->
+  <main id="main-content" tabindex="-1">
+
+    <!-- ==============================================================
+         SECTION 1: 404 HERO
+         ============================================================== -->
+    <section class="page-hero page-hero--navy error-hero" aria-labelledby="error-heading">
+      <div class="page-hero__pattern"></div>
+      <div class="error-hero__code" aria-hidden="true">404</div>
+      <div class="container">
+        <div class="error-hero__inner reveal">
+
+          <!-- Icon -->
+          <svg class="error-hero__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <circle cx="12" cy="16" r="0.75" fill="currentColor" stroke="none"/>
+          </svg>
+
+          <span class="overline" style="color: var(--gold-light);">Off the Beaten Path</span>
+          <h1 id="error-heading" class="display error-hero__title">
+            This Page Took a Wrong Turn
+          </h1>
+          <p class="error-hero__text">
+            The page you were looking for has moved, was removed, or never existed. The good news is that everything worth finding is only a click away.
+          </p>
+
+          <div class="error-hero__actions">
+            <a href="/index.html" class="btn btn--primary btn--lg">Back to Home</a>
+            <a href="/contact/index.html" class="btn btn--outline btn--lg" style="color: var(--white); border-color: rgba(255,255,255,0.45);">Contact Gerald</a>
+          </div>
+
+          <!-- Search form (uses Google site search; no server needed) -->
+          <div class="error-search">
+            <label for="error-search-input" class="error-search__label">Or search this site</label>
+            <form class="error-search__form" action="https://www.google.com/search" method="GET" role="search">
+              <input type="hidden" name="q" value="site:authorgeraldlynn.com">
+              <input
+                type="search"
+                id="error-search-input"
+                name="q"
+                class="error-search__input"
+                placeholder="Search for a page, chapter, or topic"
+                aria-label="Search this site"
+                autocomplete="off"
+              >
+              <button type="submit" class="btn btn--gold" aria-label="Search">
+                <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="9" cy="9" r="6"/>
+                  <line x1="14" y1="14" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </form>
+            <p class="error-search__note">
+              Note: The search field above sends your query to Google. Nothing is stored on this site.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         SECTION 2: POPULAR DESTINATIONS
+         ============================================================== -->
+    <section class="section" aria-labelledby="error-links-heading">
+      <div class="container">
+
+        <div class="section__header text-center reveal">
+          <span class="overline">Popular Destinations</span>
+          <h2 id="error-links-heading" class="section__title">Where Most People Are Headed</h2>
+          <p class="section__subtitle">
+            These are the pages visitors reach for most often. Pick one and you will be back on track.
+          </p>
+        </div>
+
+        <div class="error-links" style="margin-top: var(--sp-2xl);">
+
+          <!-- The Book -->
+          <a href="/about/index.html" class="error-link-card reveal reveal-up">
+            <svg class="error-link-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+            <h3 class="error-link-card__title">The Book</h3>
+            <p class="error-link-card__desc">
+              Learn what <em>Surviving the U.S. Healthcare System: the Patient's Playbook</em> covers and who it is for.
+            </p>
+          </a>
+
+          <!-- About Gerald -->
+          <a href="/author/index.html" class="error-link-card reveal reveal-up">
+            <svg class="error-link-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
+            </svg>
+            <h3 class="error-link-card__title">About Gerald</h3>
+            <p class="error-link-card__desc">
+              Meet Gerald Lynn, C.M.R., and learn about the experience behind the book.
+            </p>
+          </a>
+
+          <!-- Chapters -->
+          <a href="/chapters/index.html" class="error-link-card reveal reveal-up">
+            <svg class="error-link-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <line x1="7" y1="8" x2="17" y2="8"/>
+              <line x1="7" y1="12" x2="17" y2="12"/>
+              <line x1="7" y1="16" x2="13" y2="16"/>
+            </svg>
+            <h3 class="error-link-card__title">Chapters</h3>
+            <p class="error-link-card__desc">
+              Browse the table of contents and preview what each chapter covers.
+            </p>
+          </a>
+
+          <!-- Reviews -->
+          <a href="/reviews/index.html" class="error-link-card reveal reveal-up">
+            <svg class="error-link-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <h3 class="error-link-card__title">Reviews</h3>
+            <p class="error-link-card__desc">
+              Read what readers and reviewers are saying about the book.
+            </p>
+          </a>
+
+          <!-- Speaking -->
+          <a href="/speaking/index.html" class="error-link-card reveal reveal-up">
+            <svg class="error-link-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M12 3v18"/>
+              <path d="M5 8h14"/>
+              <path d="M7 8v6a5 5 0 0 0 10 0V8"/>
+            </svg>
+            <h3 class="error-link-card__title">Speaking</h3>
+            <p class="error-link-card__desc">
+              Invite Gerald to speak at your conference, workshop, or book club.
+            </p>
+          </a>
+
+          <!-- FAQ -->
+          <a href="/faq/index.html" class="error-link-card reveal reveal-up">
+            <svg class="error-link-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <circle cx="12" cy="17" r="0.75" fill="currentColor" stroke="none"/>
+            </svg>
+            <h3 class="error-link-card__title">FAQ</h3>
+            <p class="error-link-card__desc">
+              Get quick answers about the book, formats, events, and media requests.
+            </p>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         SECTION 3: BUY THE BOOK CTA
+         ============================================================== -->
+    <section class="section section--ice" aria-labelledby="error-buy-heading">
+      <div class="container">
+        <div class="grid-60-40" style="align-items: center;">
+
+          <div class="reveal reveal-left">
+            <span class="overline">While You Are Here</span>
+            <h2 id="error-buy-heading" class="section__title" style="margin-bottom: var(--sp-md);">
+              Get the Patient's Playbook
+            </h2>
+            <p class="text-secondary" style="margin-bottom: var(--sp-lg);">
+              A plain-language guide to understanding the system, asking better questions, and taking practical steps with confidence.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--sp-sm);">
+              <a href="https://www.amazon.com/dp/B0FXCZVW2J" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--lg" data-config="kindleUrl">Buy on Amazon</a>
+              <a href="/buy/index.html" class="btn btn--outline btn--lg">See All Retailers</a>
+            </div>
+          </div>
+
+          <div class="reveal reveal-right">
+            <img
+              src="/assets/images/book-cover-front-800w.jpg"
+              alt="Cover of Surviving the U.S. Healthcare System: the Patient's Playbook"
+              width="800"
+              height="1200"
+              loading="lazy"
+              decoding="async"
+              style="display: block; width: min(100%, 220px); height: auto; margin: 0 auto var(--sp-lg); border-radius: var(--radius-md, 8px); box-shadow: 0 12px 32px rgba(0,0,0,0.2);"
+            >
+            <div class="panel panel--navy" style="padding: var(--sp-xl);">
+              <h3 class="h4" style="color: var(--white); margin-bottom: var(--sp-sm);">Available Formats</h3>
+              <ul class="check-list" style="color: var(--text-on-navy);">
+                <li>Kindle eBook</li>
+                <li>Audiobook</li>
+                <li>Paperback</li>
+                <li>Hardcover (coming soon)</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         SECTION 4: FINAL FALLBACK
+         ============================================================== -->
+    <section class="section" aria-labelledby="error-fallback-heading">
+      <div class="container container--narrow text-center reveal">
+        <h2 id="error-fallback-heading" class="h3" style="margin-bottom: var(--sp-sm);">
+          Still Cannot Find What You Need?
+        </h2>
+        <p class="text-secondary" style="margin-bottom: var(--sp-lg);">
+          Send a message and we will point you in the right direction.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--sp-sm); justify-content: center;">
+          <a href="/contact/index.html" class="btn btn--primary btn--lg">Contact Gerald</a>
+          <a href="/index.html" class="btn btn--outline btn--lg">Back to Home</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================================================================
+       SITE FOOTER (ROOT-RELATIVE LINKS)
+       ================================================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-main container">
+      <div class="footer-grid">
+
+        <!-- Column 1: About -->
+        <div class="footer-about">
+          <a href="/index.html" class="footer-about__logo" aria-label="Gerald Lynn - Home">
+            <span class="footer-about__logo-mark" aria-hidden="true"></span>
+            <span class="footer-about__logo-name">Gerald Lynn</span>
+          </a>
+          <p class="footer-about__desc">
+            Certified Medical Representative. Patient Advocate. Healthcare Navigator. Educator. Author of <em>Surviving the U.S. Healthcare System: the Patient's Playbook</em>.
+          </p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/geraldlynn.author/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+            </a>
+            <a href="https://www.facebook.com/p/Gerald-Lynn-61577333356109/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/gerald-lynn-c-m-r-1866a930" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://www.goodreads.com/author/show/60993565.Gerald_Lynn_C_M_R_" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Goodreads">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Pages -->
+        <div>
+          <h3 class="footer-heading">Explore</h3>
+          <div class="footer-links">
+            <a href="/about/index.html" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> The Book
+            </a>
+            <a href="/author/index.html" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> About Gerald
+            </a>
+            <a href="/chapters/index.html" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> Chapters
+            </a>
+            <a href="/reviews/index.html" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> Reviews
+            </a>
+            <a href="/speaking/index.html" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> Speaking
+            </a>
+            <a href="/faq/index.html" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> FAQ
+            </a>
+            <a href="/contact/index.html" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> Contact
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 3: Get the Book -->
+        <div>
+          <h3 class="footer-heading">Get the Book</h3>
+          <div class="footer-buy-links">
+            <a href="https://www.amazon.com/dp/B0FXCZVW2J" target="_blank" rel="noopener noreferrer" class="footer-buy-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg> Kindle
+            </a>
+            <a href="https://www.audible.com/pd/Surviving-the-US-Healthcare-System-Audiobook/B0GWP8TRR7" target="_blank" rel="noopener noreferrer" class="footer-buy-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z"/></svg> Audiobook
+            </a>
+            <a href="https://www.amazon.com/dp/B0FXDBZVSS" target="_blank" rel="noopener noreferrer" class="footer-buy-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Paperback
+            </a>
+            <!-- TODO(GERALD): Hardcover link pending -->
+            <a href="#" data-config="hardcoverUrl" class="footer-buy-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="6" x2="17" y2="6"/></svg> Hardcover
+            </a>
+            <a href="https://www.barnesandnoble.com/w/surviving-the-us-healthcare-system-gerald-lynn-c-m-r/1148602416?ean=9798349539831" target="_blank" rel="noopener noreferrer" class="footer-buy-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Barnes &amp; Noble
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 4: Newsletter -->
+        <div class="footer-newsletter">
+          <h3 class="footer-heading">Stay Informed</h3>
+          <p class="footer-newsletter__desc">
+            Get healthcare tips, book updates, and event announcements. No spam. Unsubscribe anytime.
+          </p>
+          <form class="newsletter-inline" id="footer-newsletter-form" data-form="newsletter" novalidate>
+            <label for="footer-newsletter-email" class="sr-only">Email address</label>
+            <input type="email" id="footer-newsletter-email" name="email" class="form-input" placeholder="Your email address" required autocomplete="email" aria-required="true">
+            <div class="form-hp" aria-hidden="true">
+              <label for="footer-nl-hp">Leave blank</label>
+              <input type="text" id="footer-nl-hp" name="_gotcha" tabindex="-1" autocomplete="off">
+            </div>
+            <button type="submit" class="btn btn-on-dark">
+              <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 10h14M13 4l6 6-6 6"/></svg>
+              <span class="sr-only">Subscribe</span>
+            </button>
+          </form>
+          <div class="form-message form-message--success" id="footer-nl-success" role="alert" aria-live="polite" style="display:none;">
+            <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4"/></svg>
+            You're subscribed. Welcome aboard.
+          </div>
+          <p class="footer-newsletter__note">We respect your privacy. Read our <a href="/privacy/index.html">Privacy Policy</a>.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="container">
+      <div class="footer-disclaimer">
+        <strong>Disclaimer:</strong> This website offers educational information and personal experience. It is not medical, legal or financial advice. Talk with a qualified professional about your own situation.
+      </div>
+    </div>
+
+    <!-- Bottom bar: copyright and legal -->
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="footer-bottom__inner">
+          <p class="footer-copyright">
+            &copy; <span class="js-year">2025</span> Gerald Lynn, C.M.R. All rights reserved.
+          </p>
+          <div class="footer-legal">
+            <a href="/privacy/index.html">Privacy Policy</a>
+            <a href="#top" class="footer-back-to-top">
+              Back to top
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 12V2M2 5l5-5 5 5"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top button -->
+  <button
+    class="back-to-top"
+    aria-label="Back to top"
+    type="button"
+    hidden
+  >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <!-- ================================================================
+       MAIN SCRIPTS (ROOT-RELATIVE)
+       ================================================================ -->
+  <script src="/js/main.js" defer></script>
+  <script src="/js/animations.js" defer></script>
+  <script src="/js/forms.js" defer></script>
+  <script src="/js/nav.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ==================================================================
+  Gerald Lynn, C.M.R. - XML Sitemap
+  File: sitemap.xml  (ROOT LEVEL)
+  URL:  https://authorgeraldlynn.com/sitemap.xml
+
+  Notes:
+  - Only canonical, indexable URLs are listed.
+  - 404.html is intentionally EXCLUDED (it is marked noindex).
+  - thank-you pages and other form-confirmation pages are EXCLUDED.
+  - Update <lastmod> dates when page content materially changes.
+  - Priorities are relative, not absolute. 1.0 = most important.
+  ==================================================================
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ============================================================
+       HOME
+       ============================================================ -->
+  <url>
+    <loc>https://authorgeraldlynn.com/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://authorgeraldlynn.com/assets/images/book-cover-front-800w.jpg</image:loc>
+      <image:title>Surviving the U.S. Healthcare System: the Patient's Playbook by Gerald Lynn, C.M.R.</image:title>
+      <image:caption>Book cover for Surviving the U.S. Healthcare System: the Patient's Playbook</image:caption>
+    </image:image>
+  </url>
+
+  <!-- ============================================================
+       THE BOOK (about)
+       ============================================================ -->
+  <url>
+    <loc>https://authorgeraldlynn.com/about/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://authorgeraldlynn.com/assets/images/book-cover-front-800w.jpg</image:loc>
+      <image:title>Surviving the U.S. Healthcare System: the Patient's Playbook</image:title>
+    </image:image>
+  </url>
+
+  <!-- ============================================================
+       ABOUT GERALD (author)
+       ============================================================ -->
+  <url>
+    <loc>https://authorgeraldlynn.com/author/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ============================================================
+       CHAPTERS
+       ============================================================ -->
+  <url>
+    <loc>https://authorgeraldlynn.com/chapters/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ============================================================
+       REVIEWS
+       ============================================================ -->
+  <url>
+    <loc>https://authorgeraldlynn.com/reviews/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ============================================================
+       BUY THE BOOK
+       ============================================================ -->
+  <url>
+    <loc>https://authorgeraldlynn.com/buy/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://authorgeraldlynn.com/assets/images/book-cover-front-800w.jpg</image:loc>
+      <image:title>Buy Surviving the U.S. Healthcare System: the Patient's Playbook</image:title>
+    </image:image>
+  </url>
+
+  <!-- ============================================================
+       SPEAKING
+       ============================================================ -->
+  <url>
+    <loc>https://authorgeraldlynn.com/speaking/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <url>
+    <loc>https://authorgeraldlynn.com/faq/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ============================================================
+       CONTACT
+       ============================================================ -->
+  <url>
+    <loc>https://authorgeraldlynn.com/contact/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ============================================================
+       PRIVACY POLICY
+       ============================================================ -->
+  <url>
+    <loc>https://authorgeraldlynn.com/privacy/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

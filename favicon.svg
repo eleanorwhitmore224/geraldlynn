@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ==================================================================
+  Gerald Lynn, C.M.R. - Favicon (SVG)
+  File: favicon.svg  (ROOT LEVEL)
+  URL:  https://authorgeraldlynn.com/favicon.svg
+
+  Design notes:
+  - Navy rounded square with a gold inner border and a bold gold "G".
+  - Reads cleanly at 16x16, 32x32, and 180x180 (Apple touch icon source).
+  - Uses system font fallbacks for the monogram so it renders even
+    before Bricolage Grotesque loads. This is intentional: favicons
+    must be self-contained.
+  - Colors match the site brand palette:
+      Navy: #12263a
+      Gold: #d4a84b
+  - If the brand colors change, update the two hex values below.
+  ==================================================================
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="64"
+     height="64"
+     role="img"
+     aria-label="Gerald Lynn, C.M.R.">
+
+  <!-- Navy background with rounded corners -->
+  <rect width="64" height="64" rx="14" ry="14" fill="#12263a"/>
+
+  <!-- Subtle gold inner border for polish at larger sizes -->
+  <rect x="4" y="4" width="56" height="56" rx="10" ry="10"
+        fill="none" stroke="#d4a84b" stroke-width="1.5" opacity="0.55"/>
+
+  <!-- Gold monogram "G" -->
+  <text x="32" y="45"
+        text-anchor="middle"
+        font-family="'Bricolage Grotesque', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="700"
+        font-size="38"
+        letter-spacing="-1.5"
+        fill="#d4a84b">G</text>
+
+</svg>

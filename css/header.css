@@ -113,11 +113,6 @@
   color: var(--gold);
 }
 
-/* Hide mobile toggle on desktop */
-.nav__toggle {
-  display: none;
-}
-
 /* =========================================
    RIGHT-SIDE TAB RAIL (DESKTOP ONLY)
    ========================================= */

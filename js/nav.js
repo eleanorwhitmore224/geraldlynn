@@ -15,11 +15,11 @@
 
   const header        = document.querySelector('.site-header');
   const hamburger     = document.querySelector('.nav__toggle');
-  const mobileMenu    = document.querySelector('.nav__list');
-  const mobileOverlay = null;
-  const mobileClose   = null;
+  const mobileMenu    = document.querySelector('.mobile-menu');
+  const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+  const mobileClose   = document.querySelector('.mobile-menu__close');
   const body          = document.body;
-
+  
   /* Tab rail (desktop) */
   const tabRail       = document.querySelector('.tab-rail');
   const tabRailItems  = tabRail ? tabRail.querySelectorAll('.tab-rail__item') : [];

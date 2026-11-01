@@ -376,3 +376,72 @@
   .nav__item { border-bottom: none; width: auto; }
   .nav__link { padding: 0; }
 }
+/* ===== FORCE MOBILE NAV (overrides earlier rules) ===== */
+@media (max-width: 1023px) {
+  .header__inner {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-sm);
+  }
+  .nav {
+    display: flex !important;
+    position: static;
+  }
+  .nav__toggle {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .nav__toggle-bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--ink);
+  }
+  .nav__list {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    right: var(--container-pad);
+    width: 260px;
+    flex-direction: column;
+    gap: 0;
+    padding: var(--sp-sm);
+    background-color: var(--white);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius-md);
+    z-index: 9998;
+  }
+  .nav__list.is-open {
+    display: flex !important;
+  }
+  .nav__item { width: 100%; }
+  .nav__link {
+    display: block;
+    padding: var(--sp-sm) var(--sp-xs);
+    font-size: 1rem;
+  }
+  .header__cta { display: none; }
+}
+
+/* Desktop: show the links inline, hide the toggle */
+@media (min-width: 1024px) {
+  .nav__toggle { display: none !important; }
+  .nav__list {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    gap: 1.5rem;
+    width: auto;
+    padding: 0;
+    box-shadow: none;
+    background: none;
+  }
+  .nav__link { padding: 0; }
+}

@@ -68,12 +68,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--sp-sm);
 }
 
 .header__logo {
   display: flex;
   align-items: center;
   text-decoration: none;
+  min-width: 0;
 }
 
 .header__wordmark {
@@ -83,11 +85,12 @@
   color: var(--navy);
 }
 
-/* Desktop Navigation */
+/* Desktop navigation (base) */
 .nav {
   display: flex;
   align-items: center;
-  position: relative; /* For mobile dropdown */
+  position: relative;
+  flex-shrink: 0;
 }
 
 .nav__list {
@@ -134,7 +137,7 @@
   justify-content: flex-end;
   text-decoration: none;
   position: relative;
-  right: -10px; /* Pushes tabs slightly off-screen */
+  right: -10px;
   transition: right 0.2s ease;
 }
 
@@ -168,7 +171,6 @@
   box-shadow: -2px 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Tab Rail Colors */
 .tab-rail__tab--blue { background-color: var(--tab-blue); }
 .tab-rail__tab--green { background-color: var(--tab-green); }
 .tab-rail__tab--teal { background-color: var(--tab-teal); }
@@ -179,46 +181,80 @@
 .tab-rail__tab--gold { background-color: var(--gold); }
 
 /* =========================================
-   PERFECT MOBILE DROPDOWN MENU
+   FOOTER-ADJACENT HEADER BUTTON
+   ========================================= */
+.header__cta {
+  flex-shrink: 0;
+}
+
+/* =========================================
+   MOBILE NAV (single source of truth)
+   Below 1024px: toggle visible, links in a dropdown.
    ========================================= */
 @media (max-width: 1023px) {
-  /* Show the hamburger button */
+  .header__inner {
+    padding-block: 0.75rem;
+  }
+
+  .header__wordmark {
+    font-size: 1.05rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Small phones: hide the header button so the menu toggle always fits */
+  @media (max-width: 479px) {
+    .header__cta {
+      display: none;
+    }
+  }
+
+  .nav {
+    position: static;
+    flex-shrink: 0;
+  }
+
   .nav__toggle {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
     background: none;
     border: none;
-    padding: 10px;
     cursor: pointer;
-    z-index: 9999;
+    position: relative;
+    z-index: 10001;
   }
 
   .nav__toggle-bar {
     display: block;
     width: 24px;
     height: 2px;
-    background-color: #0B1A33;
+    background-color: var(--navy);
+    border-radius: 2px;
   }
 
-  /* Hide the desktop links by default */
   .nav__list {
-    display: none !important; 
+    display: none;
     position: absolute;
     top: 100%;
+    left: 0;
     right: 0;
-    width: 250px;
-    background-color: var(--white);
     flex-direction: column;
-    padding: var(--sp-sm);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    align-items: stretch;
+    gap: 0;
+    padding: var(--sp-sm) var(--container-pad);
+    background-color: var(--white);
+    box-shadow: 0 10px 25px rgba(11, 26, 51, 0.12);
     z-index: 9998;
   }
 
-  /* Show the links when JavaScript adds the .is-open class */
   .nav__list.is-open {
-    display: flex !important;
+    display: flex;
   }
 
   .nav__item {
@@ -232,216 +268,44 @@
 
   .nav__link {
     display: block;
-    padding: var(--sp-sm) var(--sp-xs);
+    padding: var(--sp-sm) 0;
     font-size: 1rem;
   }
 }
 
-/* Reset for Desktop */
-@media (min-width: 1024px) {
-  .nav__toggle { display: none !important; }
-  .nav__list { 
-    display: flex !important; 
-    position: static; 
-    flex-direction: row; 
-    box-shadow: none; 
-    padding: 0; 
-    width: auto;
-  }
-  .nav__item { border-bottom: none; width: auto; }
-  .nav__link { padding: 0; }
-}
-
-
-/* =========================================
-   MOBILE DROPDOWN MENU
-   ========================================= */
-@media (max-width: 1023px) {
-  .nav__toggle {
-    display: flex !important;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 9999;
-  }
-  .nav__toggle-bar {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background-color: var(--ink);
-  }
+/* Tablet and small desktop: compact links so they fit beside the logo */
+@media (min-width: 1024px) and (max-width: 1279px) {
   .nav__list {
-    display: none !important;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 250px;
-    background-color: var(--white);
-    flex-direction: column;
-    padding: var(--sp-sm);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    z-index: 9998;
+    gap: 1rem;
   }
-  .nav__list.is-open {
-    display: flex !important;
-  }
-  .nav__item {
-    width: 100%;
-    border-bottom: 1px solid var(--gray-100);
-  }
-  .nav__item:last-child { border-bottom: none; }
+
   .nav__link {
-    display: block;
-    padding: var(--sp-sm) var(--sp-xs);
-    font-size: 1rem;
+    font-size: 0.875rem;
   }
 }
 
+/* Desktop: links inline, toggle hidden */
 @media (min-width: 1024px) {
-  .nav__toggle { display: none !important; }
-  .nav__list {
-    display: flex !important;
-    position: static;
-    flex-direction: row;
-    box-shadow: none;
-    padding: 0;
-    width: auto;
-  }
-  .nav__item { border-bottom: none; width: auto; }
-  .nav__link { padding: 0; }
-}
-
-/* =========================================
-   MOBILE DROPDOWN MENU
-   ========================================= */
-@media (max-width: 1023px) {
   .nav__toggle {
-    display: flex !important;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 9999;
+    display: none;
   }
-  .nav__toggle-bar {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background-color: var(--ink);
-  }
-  .nav__list {
-    display: none !important;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 250px;
-    background-color: var(--white);
-    flex-direction: column;
-    padding: var(--sp-sm);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    z-index: 9998;
-  }
-  .nav__list.is-open {
-    display: flex !important;
-  }
-  .nav__item {
-    width: 100%;
-    border-bottom: 1px solid var(--gray-100);
-  }
-  .nav__item:last-child { border-bottom: none; }
-  .nav__link {
-    display: block;
-    padding: var(--sp-sm) var(--sp-xs);
-    font-size: 1rem;
-  }
-}
 
-@media (min-width: 1024px) {
-  .nav__toggle { display: none !important; }
   .nav__list {
-    display: flex !important;
-    position: static;
+    display: flex;
     flex-direction: row;
-    box-shadow: none;
-    padding: 0;
-    width: auto;
-  }
-  .nav__item { border-bottom: none; width: auto; }
-  .nav__link { padding: 0; }
-}
-/* ===== FORCE MOBILE NAV (overrides earlier rules) ===== */
-@media (max-width: 1023px) {
-  .header__inner {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--sp-sm);
-  }
-  .nav {
-    display: flex !important;
     position: static;
-  }
-  .nav__toggle {
-    display: flex !important;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    background: none;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  .nav__toggle-bar {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background-color: var(--ink);
-  }
-  .nav__list {
-    display: none !important;
-    position: absolute;
-    top: 100%;
-    right: var(--container-pad);
-    width: 260px;
-    flex-direction: column;
-    gap: 0;
-    padding: var(--sp-sm);
-    background-color: var(--white);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    border-radius: var(--radius-md);
-    z-index: 9998;
-  }
-  .nav__list.is-open {
-    display: flex !important;
-  }
-  .nav__item { width: 100%; }
-  .nav__link {
-    display: block;
-    padding: var(--sp-sm) var(--sp-xs);
-    font-size: 1rem;
-  }
-  .header__cta { display: none; }
-}
-
-/* Desktop: show the links inline, hide the toggle */
-@media (min-width: 1024px) {
-  .nav__toggle { display: none !important; }
-  .nav__list {
-    display: flex !important;
-    position: static;
-    flex-direction: row;
     gap: 1.5rem;
-    width: auto;
     padding: 0;
-    box-shadow: none;
     background: none;
+    box-shadow: none;
   }
-  .nav__link { padding: 0; }
+
+  .nav__item {
+    width: auto;
+    border-bottom: none;
+  }
+
+  .nav__link {
+    padding: 0;
+  }
 }

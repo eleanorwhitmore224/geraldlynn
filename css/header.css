@@ -309,3 +309,12 @@
     padding: 0;
   }
 }
+
+/* =========================================
+   HIDE UNUSED OLD MOBILE PANEL
+   The dropdown (.nav__list) is the only mobile menu.
+   ========================================= */
+.mobile-menu,
+.mobile-menu-overlay {
+  display: none !important;
+}

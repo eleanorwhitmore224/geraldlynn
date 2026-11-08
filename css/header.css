@@ -318,3 +318,15 @@
 .mobile-menu-overlay {
   display: none !important;
 }
+
+/* =========================================
+   HIDE COLORED TAB RAIL ON PHONES  (Plan Step 3)
+   The tab rail overlaps content on narrow screens.
+   Canonical home for this rule is css/responsive.css,
+   but it works here too if you prefer one file.
+   ========================================= */
+@media (max-width: 900px) {
+  .tab-rail {
+    display: none !important;
+  }
+}

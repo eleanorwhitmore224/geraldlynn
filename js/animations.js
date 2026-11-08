@@ -152,21 +152,30 @@ function initStaggeredChildren() {
 }
 
 /* --------------------------------------------------------------------------
-   4. COUNT-UP ANIMATION
+   4. COUNT-UP ANIMATION (WITH FAIL-SAFE)
    -------------------------------------------------------------------------- */
 function initCountUp() {
-  if (shouldReduceMotion()) {
-    setCountUpFinalValues();
-    return;
-  }
-
-  if (!("IntersectionObserver" in window)) {
-    setCountUpFinalValues();
-    return;
-  }
-
-  const counters = qsa(".count-up");
+  const counters = Array.from(qsa(".count-up"));
   if (counters.length === 0) return;
+
+  // FAIL-SAFE: If the scroll animation fails for any reason, force the final 
+  // numbers after 2 seconds.
+  setTimeout(function() {
+    counters.forEach(function(el) {
+      if (el.textContent === "0" || el.textContent === "0.0") {
+        const target = parseFloat(el.getAttribute("data-target"));
+        const decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
+        const suffix = el.getAttribute("data-suffix") || "";
+        const prefix = el.getAttribute("data-prefix") || "";
+        el.textContent = prefix + target.toFixed(decimals) + suffix;
+      }
+    });
+  }, 2000);
+
+  if (shouldReduceMotion() || !("IntersectionObserver" in window)) {
+    setCountUpFinalValues();
+    return;
+  }
 
   const countObserver = new IntersectionObserver(
     function (entries) {
@@ -177,7 +186,7 @@ function initCountUp() {
         }
       });
     },
-    { threshold: 0.3 }
+    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
   );
 
   counters.forEach(function (counter) {

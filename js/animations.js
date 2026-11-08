@@ -159,7 +159,7 @@ function initCountUp() {
   if (counters.length === 0) return;
 
   // FAIL-SAFE: If the scroll animation fails for any reason, force the final 
-  // numbers after 2 seconds.
+  // numbers after 1.5 seconds.
   setTimeout(function() {
     counters.forEach(function(el) {
       if (el.textContent === "0" || el.textContent === "0.0") {
@@ -170,7 +170,7 @@ function initCountUp() {
         el.textContent = prefix + target.toFixed(decimals) + suffix;
       }
     });
-  }, 2000);
+  }, 1500);
 
   if (shouldReduceMotion() || !("IntersectionObserver" in window)) {
     setCountUpFinalValues();

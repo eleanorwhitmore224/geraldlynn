@@ -11,6 +11,9 @@
 
 "use strict";
 
+// Tell CSS that JavaScript is running so it can enable the reveal animations.
+document.documentElement.classList.add("js");
+
 /* --------------------------------------------------------------------------
    1. REDUCED MOTION GATE
    -------------------------------------------------------------------------- */
@@ -68,12 +71,6 @@ function watchReducedMotion() {
  * when they enter the viewport.
  *
  * CSS handles the actual transition; JS just toggles the .is-visible class.
- *
- * Classes and their motion:
- *   .reveal        — fade up (translateY 30px to 0, opacity 0 to 1)
- *   .reveal-left   — slide in from left
- *   .reveal-right  — slide in from right
- *   .reveal-scale  — scale up from 0.9 to 1
  */
 function initRevealObserver() {
   if (shouldReduceMotion()) {
@@ -132,6 +129,9 @@ function initRevealObserver() {
   allRevealElements.forEach(function (el) {
     revealObserver.observe(el);
   });
+
+  // Safety net: if something goes wrong, force everything visible after 3s
+  setTimeout(revealAllImmediately, 3000);
 
   // Store reference for cleanup if needed
   window.__glRevealObserver = revealObserver;
@@ -193,17 +193,6 @@ function initStaggeredChildren() {
  *   - 4.8 (star rating)
  *   - 9 (chapters)
  *   - 4 (star breakdown)
- *
- * Elements should have:
- *   <span class="count-up" data-target="27" data-suffix="+">0</span>
- *   <span class="count-up" data-target="4.8" data-decimals="1">0</span>
- *
- * Attributes:
- *   data-target   — The final number (required)
- *   data-decimals — Number of decimal places (default 0)
- *   data-suffix   — Text after the number, e.g. "+" or "%"
- *   data-prefix   — Text before the number, e.g. "$"
- *   data-duration — Animation duration in ms (default 1500)
  */
 function initCountUp() {
   if (shouldReduceMotion()) {
@@ -294,18 +283,10 @@ function setCountUpFinalValues() {
    -------------------------------------------------------------------------- */
 
 /**
- * A lightweight parallax effect for hero background images. The image moves
- * at a fraction of the scroll speed, creating depth without being distracting.
- *
- * Only applies to elements with data-parallax="true" and a background image.
- * The intensity is controlled by data-parallax-speed (0.1 to 0.5, default 0.2).
- *
- * Disabled on mobile and when reduced motion is active.
+ * A lightweight parallax effect for hero background images.
  */
 function initParallax() {
   if (shouldReduceMotion()) return;
-
-  // Disable on small screens where parallax is janky
   if (window.innerWidth < 768) return;
 
   const parallaxElements = qsa("[data-parallax]");
@@ -320,7 +301,6 @@ function initParallax() {
       const rect = el.getBoundingClientRect();
       const speed = parseFloat(el.getAttribute("data-parallax-speed") || "0.2");
 
-      // Only animate when the element is near the viewport
       if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
 
       const yOffset = (scrollY - el.offsetTop) * speed;
@@ -348,9 +328,7 @@ function initParallax() {
    -------------------------------------------------------------------------- */
 
 /**
- * Add an "in-view" class to sections as they enter the viewport. This allows
- * CSS to trigger section-level animations (like background color transitions
- * or border reveals) without needing per-element observers.
+ * Add an "in-view" class to sections as they enter the viewport.
  */
 function initSectionObserver() {
   if (shouldReduceMotion()) return;
@@ -364,9 +342,6 @@ function initSectionObserver() {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("in-view");
-        } else {
-          // Optionally remove when out of view for re-triggering
-          // entry.target.classList.remove("in-view");
         }
       });
     },
@@ -386,11 +361,7 @@ function initSectionObserver() {
    -------------------------------------------------------------------------- */
 
 /**
- * Orchestrate the initial page load animation sequence. Elements with
- * data-load-order="1", data-load-order="2", etc. fade in sequentially
- * when the page first loads.
- *
- * This runs once on page load and does not re-trigger on scroll.
+ * Orchestrate the initial page load animation sequence.
  */
 function initPageLoadSequence() {
   if (shouldReduceMotion()) {
@@ -401,7 +372,6 @@ function initPageLoadSequence() {
   const loadElements = qsa("[data-load-order]");
   if (loadElements.length === 0) return;
 
-  // Sort by load order
   loadElements.sort(function (a, b) {
     const orderA = parseInt(a.getAttribute("data-load-order") || "0", 10);
     const orderB = parseInt(b.getAttribute("data-load-order") || "0", 10);
@@ -410,7 +380,7 @@ function initPageLoadSequence() {
 
   loadElements.forEach(function (el) {
     const order = parseInt(el.getAttribute("data-load-order") || "0", 10);
-    const delay = order * 150 + 200; // Base delay + stagger
+    const delay = order * 150 + 200;
 
     setTimeout(function () {
       el.classList.add("load-visible");
@@ -432,13 +402,6 @@ function showAllLoadElements() {
    8. ANIMATED UNDERLINE FOR LINKS
    -------------------------------------------------------------------------- */
 
-/**
- * Add a subtle underline animation to specific links on hover. The underline
- * grows from left to right using a CSS pseudo-element, triggered by a JS
- * class for more control.
- *
- * Applies to links with class .link-underline within the main content area.
- */
 function initLinkUnderlines() {
   if (shouldReduceMotion()) return;
 
@@ -457,11 +420,6 @@ function initLinkUnderlines() {
    9. CARD HOVER LIFT
    -------------------------------------------------------------------------- */
 
-/**
- * Enhance card hover effects with a subtle lift and shadow change.
- * CSS handles the transition; JS adds the class for touch devices where
- * :hover doesn't work reliably.
- */
 function initCardHover() {
   const cards = qsa(".card, .review-card, .chapter-card");
   if (cards.length === 0) return;
@@ -469,10 +427,8 @@ function initCardHover() {
   const isTouch = document.body.classList.contains("is-touch");
 
   if (isTouch) {
-    // On touch, toggle on tap
     cards.forEach(function (card) {
       on(card, "touchstart", function () {
-        // Remove active from all other cards
         cards.forEach(function (c) {
           if (c !== card) c.classList.remove("card--hover");
         });
@@ -480,18 +436,12 @@ function initCardHover() {
       }, { passive: true });
     });
   }
-  // On non-touch, CSS :hover handles it
 }
 
 /* --------------------------------------------------------------------------
    10. IMAGE REVEAL ON SCROLL
    -------------------------------------------------------------------------- */
 
-/**
- * Reveal images with a clip-path or mask animation as they scroll into view.
- * Images with class .img-reveal start with a clip-path that hides them,
- * then animate to full visibility.
- */
 function initImageReveal() {
   if (shouldReduceMotion()) {
     qsa(".img-reveal").forEach(function (img) {
@@ -531,14 +481,6 @@ function initImageReveal() {
    11. TAB RAIL SCROLL SPY (ENHANCEMENT)
    -------------------------------------------------------------------------- */
 
-/**
- * Enhance the chapter tab rail (the colored sidebar on desktop) by
- * highlighting the current chapter as the user scrolls through the
- * chapters page. This complements the nav.js scroll spy.
- *
- * Looks for sections with data-chapter="N" and corresponding tab markers
- * with data-tab-marker="N".
- */
 function initTabRailSpy() {
   if (shouldReduceMotion()) return;
   if (!("IntersectionObserver" in window)) return;
@@ -560,7 +502,6 @@ function initTabRailSpy() {
 
           activeChapter = chapterNum;
 
-          // Update tab markers
           tabMarkers.forEach(function (marker) {
             const markerNum = marker.getAttribute("data-tab-marker");
             if (markerNum === chapterNum) {
@@ -587,13 +528,6 @@ function initTabRailSpy() {
    12. TEXT SPLIT ANIMATION HELPERS
    -------------------------------------------------------------------------- */
 
-/**
- * Split text content into individual character spans for letter-by-letter
- * animation. Used sparingly on hero headings only.
- *
- * Elements with data-split="chars" will have their text wrapped in spans.
- * The actual animation is handled by CSS with staggered delays.
- */
 function initTextSplit() {
   if (shouldReduceMotion()) return;
 
@@ -604,10 +538,7 @@ function initTextSplit() {
     const text = el.textContent;
     if (!text || text.trim().length === 0) return;
 
-    // Preserve accessible text
     el.setAttribute("aria-label", text);
-
-    // Clear and rebuild with spans
     el.innerHTML = "";
     const chars = text.split("");
     chars.forEach(function (char, index) {
@@ -619,7 +550,6 @@ function initTextSplit() {
       el.appendChild(span);
     });
 
-    // Trigger animation after a brief delay
     requestAnimationFrame(function () {
       el.classList.add("split-active");
     });
@@ -630,11 +560,6 @@ function initTextSplit() {
    13. SCROLL VELOCITY DETECTION
    -------------------------------------------------------------------------- */
 
-/**
- * Track scroll velocity and add a class to the body when the user is
- * scrolling fast. This can be used to disable expensive animations during
- * rapid scrolling to maintain performance.
- */
 function initScrollVelocity() {
   if (shouldReduceMotion()) return;
 
@@ -642,7 +567,7 @@ function initScrollVelocity() {
   let lastTime = performance.now();
   let velocity = 0;
 
-  const fastThreshold = 30; // pixels per frame
+  const fastThreshold = 30;
 
   const checkVelocity = throttle(function () {
     const currentY = window.pageYOffset;
@@ -670,13 +595,6 @@ function initScrollVelocity() {
    14. SECTION PROGRESS INDICATORS
    -------------------------------------------------------------------------- */
 
-/**
- * For long-form pages, show a small progress indicator on the side that
- * fills as the user reads through each section.
- *
- * Elements with data-section-progress="true" get a child bar that grows
- * based on how much of the section is visible.
- */
 function initSectionProgress() {
   if (shouldReduceMotion()) return;
 
@@ -696,9 +614,7 @@ function initSectionProgress() {
 
       const sectionTop = rect.top + scrollY;
       const sectionHeight = rect.height;
-      const sectionBottom = sectionTop + sectionHeight;
 
-      // Calculate how much of the section has been scrolled past
       const scrolledPast = scrollY + viewH * 0.5 - sectionTop;
       const progress = clamp(scrolledPast / sectionHeight, 0, 1);
 
@@ -722,15 +638,6 @@ function initSectionProgress() {
    15. HERO TAGLINE TYPEWRITER (OPTIONAL)
    -------------------------------------------------------------------------- */
 
-/**
- * A subtle typewriter effect for the hero tagline. Types out the text
- * character by character, then stops. Only runs once on page load.
- *
- * Element: <span class="typewriter" data-text="Your tagline here"></span>
- *
- * This is intentionally conservative: slow speed, no blinking cursor,
- * no looping. It runs once and stays.
- */
 function initTypewriter() {
   if (shouldReduceMotion()) {
     qsa(".typewriter").forEach(function (el) {
@@ -760,7 +667,6 @@ function initTypewriter() {
       }
     }
 
-    // Start after a delay to let the page settle
     setTimeout(typeNext, 800);
   });
 }
@@ -769,13 +675,6 @@ function initTypewriter() {
    16. MAGNETIC BUTTON EFFECT (DESKTOP ONLY)
    -------------------------------------------------------------------------- */
 
-/**
- * On desktop, CTA buttons with class .btn-magnetic subtly shift toward
- * the cursor when hovered. The effect is small (max 8px) and purposeful:
- * it draws the eye and makes the button feel tactile.
- *
- * Disabled on touch devices and when reduced motion is active.
- */
 function initMagneticButtons() {
   if (shouldReduceMotion()) return;
   if (document.body.classList.contains("is-touch")) return;
@@ -812,12 +711,6 @@ function initMagneticButtons() {
    17. SMOOTH NUMBER TRANSITIONS
    -------------------------------------------------------------------------- */
 
-/**
- * When a number in the DOM changes (e.g., a filter updates a count),
- * animate the transition smoothly rather than jumping.
- *
- * Usage: call animateNumberChange(element, newValue, duration)
- */
 function animateNumberChange(el, newValue, duration) {
   if (shouldReduceMotion()) {
     el.textContent = newValue;
@@ -852,11 +745,6 @@ function animateNumberChange(el, newValue, duration) {
    18. RAF LOOP MANAGER
    -------------------------------------------------------------------------- */
 
-/**
- * A centralized requestAnimationFrame loop manager. Instead of each module
- * running its own RAF loop (which wastes CPU), they register callbacks
- * here and share a single loop.
- */
 const RAFManager = (function () {
   let callbacks = [];
   let rafId = null;
@@ -877,11 +765,6 @@ const RAFManager = (function () {
   }
 
   return {
-    /**
-     * Register a callback to run every frame.
-     * @param {Function} fn - Callback receiving timestamp
-     * @returns {number} ID for removal
-     */
     add: function (fn) {
       const id = callbacks.length;
       callbacks.push(fn);
@@ -891,20 +774,11 @@ const RAFManager = (function () {
       }
       return id;
     },
-
-    /**
-     * Remove a callback by its ID.
-     * @param {number} id
-     */
     remove: function (id) {
       if (callbacks[id]) {
         callbacks[id] = null;
       }
     },
-
-    /**
-     * Stop the entire loop and clear all callbacks.
-     */
     stop: function () {
       running = false;
       if (rafId) {
@@ -920,10 +794,6 @@ const RAFManager = (function () {
    19. CLEANUP & DISCONNECT
    -------------------------------------------------------------------------- */
 
-/**
- * Disconnect all observers and stop all animation loops. Called during
- * page transitions or when the page is being unloaded.
- */
 function cleanupAnimations() {
   if (window.__glRevealObserver) {
     window.__glRevealObserver.disconnect();
@@ -940,23 +810,16 @@ if (typeof window !== "undefined") {
    20. ANIMATION INITIALIZATION
    -------------------------------------------------------------------------- */
 
-/**
- * Master init for all animation modules. Called from main.js or directly
- * on DOMContentLoaded.
- */
 function initAnimations() {
-  // Gate: check reduced motion first
   watchReducedMotion();
 
   if (shouldReduceMotion()) {
-    // Show everything immediately, no animations
     revealAllImmediately();
     setCountUpFinalValues();
     showAllLoadElements();
     return;
   }
 
-  // Run all animation modules
   try { initStaggeredChildren(); } catch (e) { console.error("[Animations] stagger:", e); }
   try { initRevealObserver(); } catch (e) { console.error("[Animations] reveal:", e); }
   try { initCountUp(); } catch (e) { console.error("[Animations] count-up:", e); }
@@ -978,9 +841,18 @@ function initAnimations() {
    21. BOOT
    -------------------------------------------------------------------------- */
 
-// Initialize when DOM is ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initAnimations);
 } else {
   initAnimations();
 }
+
+// Fix for Back Button (bfcache) - Force everything visible on pageshow
+window.addEventListener("pageshow", function (event) {
+  // If the page was restored from cache
+  if (event.persisted) {
+    revealAllImmediately();
+    setCountUpFinalValues();
+    showAllLoadElements();
+  }
+});

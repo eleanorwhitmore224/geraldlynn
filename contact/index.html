@@ -159,7 +159,7 @@
               <h2 id="form-heading" class="section__title" style="font-size: var(--fs-2xl); margin-bottom: var(--sp-xs);">Send a Message</h2>
               <p class="text-secondary" style="margin-bottom: var(--sp-xl);">Fill out the form below and we will get back to you as soon as possible.</p>
 
-              <form data-form="contact" action="#" method="POST" novalidate>
+              <form data-form="contact" action="https://formspree.io/f/mdeejpdq" method="POST" novalidate>
                 <!-- Honeypot -->
                 <div class="hp-field-wrap" aria-hidden="true" style="position: absolute; left: -9999px;">
                   <label for="contact-gotcha">Leave this field empty</label>
@@ -374,7 +374,8 @@
           <p class="footer-newsletter__desc">
             Get healthcare tips, book updates, and event announcements. No spam. Unsubscribe anytime.
           </p>
-          <form class="newsletter-inline" id="footer-newsletter-form" data-form="newsletter" novalidate>
+          <form class="newsletter-inline" id="footer-newsletter-form" data-form="newsletter" action="https://formspree.io/f/mdeejpdq" method="POST" novalidate>
+            <input type="hidden" name="form_type" value="newsletter">
             <label for="footer-newsletter-email" class="sr-only">Email address</label>
             <input type="email" id="footer-newsletter-email" name="email" class="form-input" placeholder="Your email address" required autocomplete="email" aria-required="true">
             <div class="form-hp" aria-hidden="true">

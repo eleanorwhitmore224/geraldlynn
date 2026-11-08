@@ -719,7 +719,9 @@
           <p class="footer-newsletter__desc">
             Get healthcare tips, book updates, and event announcements. No spam. Unsubscribe anytime.
           </p>
-          <form class="newsletter-inline" id="footer-newsletter-form" data-form="newsletter" novalidate>
+          <form class="newsletter-inline" id="footer-newsletter-form" data-form="newsletter" action="https://formspree.io/f/mdeejpdq" method="POST" novalidate>
+  <input type="hidden" name="form_type" value="newsletter">
+  <label for="footer-newsletter-email" class="sr-only">Email address</label>
             <label for="footer-newsletter-email" class="sr-only">Email address</label>
             <input type="email" id="footer-newsletter-email" name="email" class="form-input" placeholder="Your email address" required autocomplete="email" aria-required="true">
             <div class="form-hp" aria-hidden="true">

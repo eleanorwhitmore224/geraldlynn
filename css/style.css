@@ -4608,4 +4608,12 @@ section#newsletter {
     transition: none;
   }
 }
-
+/* =========================================
+   FINAL PRINT FIX (Ensures reveal elements show)
+   ========================================= */
+@media print {
+  .reveal, .reveal-left, .reveal-right, .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

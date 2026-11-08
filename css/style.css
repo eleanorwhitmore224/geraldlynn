@@ -4608,3 +4608,12 @@ section#newsletter {
     transition: none;
   }
 }
+
+/* EMERGENCY FIX: Force all content visible */
+.js .reveal, 
+.js .reveal-left, 
+.js .reveal-right, 
+.js .reveal-scale {
+  opacity: 1 !important;
+  transform: none !important;
+}

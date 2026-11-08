@@ -3042,62 +3042,11 @@ main a:not(.btn):not(.card):not(.card-link):not(.review-card):not(.nav-link):not
 
 
 /* ==========================================================================
-   SECTION 27: SCROLL REVEAL ANIMATIONS
-   Base state for scroll-triggered reveals. Activated by animations.js.
+   SECTION 27: SCROLL REVEAL STAGGER DELAYS
+   Base visibility is controlled by the REVEAL SYSTEM block at the bottom
+   of this file. These classes only add transition-delay for staggering.
    ========================================================================== */
 
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity var(--duration-slow) var(--ease-out),
-              transform var(--duration-slow) var(--ease-out);
-  will-change: opacity, transform;
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Directional reveals */
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-24px);
-  transition: opacity var(--duration-slow) var(--ease-out),
-              transform var(--duration-slow) var(--ease-out);
-}
-
-.reveal-left.is-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.reveal-right {
-  opacity: 0;
-  transform: translateX(24px);
-  transition: opacity var(--duration-slow) var(--ease-out),
-              transform var(--duration-slow) var(--ease-out);
-}
-
-.reveal-right.is-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* Scale reveal */
-.reveal-scale {
-  opacity: 0;
-  transform: scale(0.95);
-  transition: opacity var(--duration-slow) var(--ease-out),
-              transform var(--duration-slow) var(--ease-out);
-}
-
-.reveal-scale.is-visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Stagger delays for child elements */
 .reveal-d1 { transition-delay: 80ms; }
 .reveal-d2 { transition-delay: 160ms; }
 .reveal-d3 { transition-delay: 240ms; }
@@ -4605,13 +4554,41 @@ section#newsletter {
   color: var(--white) !important;
 }
 
-/* =========================================
-   REVEAL SYSTEM — JS-aware
-   ========================================= */
-.js .reveal        { opacity: 0; transform: translateY(20px); }
-.js .reveal-left   { opacity: 0; transform: translateX(-24px); }
-.js .reveal-right  { opacity: 0; transform: translateX(24px); }
-.js .reveal-scale  { opacity: 0; transform: scale(0.95); }
+/* ==========================================================================
+   REVEAL SYSTEM — JS-aware (SAFE VERSION)
+   Content is visible by default.
+   It only hides when .js is on <html>, and only then animates in.
+   If JS fails to load, content still shows. If a page is restored from
+   the Back button cache, the pageshow listener re-shows everything.
+   ========================================================================== */
+.reveal,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .4s, transform .4s;
+}
+.js .reveal-left {
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity .4s, transform .4s;
+}
+.js .reveal-right {
+  opacity: 0;
+  transform: translateX(16px);
+  transition: opacity .4s, transform .4s;
+}
+.js .reveal-scale {
+  opacity: 0;
+  transform: scale(.96);
+  transition: opacity .4s, transform .4s;
+}
 
 .js .reveal.is-visible,
 .js .reveal-left.is-visible,
@@ -4621,11 +4598,13 @@ section#newsletter {
   transform: none;
 }
 
-/* No-JS fallback: everything visible instantly */
-.no-js .reveal,
-.no-js .reveal-left,
-.no-js .reveal-right,
-.no-js .reveal-scale {
-  opacity: 1;
-  transform: none;
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal,
+  .js .reveal-left,
+  .js .reveal-right,
+  .js .reveal-scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

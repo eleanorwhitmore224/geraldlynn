@@ -1086,3 +1086,10 @@ on(window, "pageshow", function (e) {
     safeInit("footer-year-resume", injectFooterYear);
   }
 });
+
+const SITE_CONFIG = {
+  youtubeId: "ryNH-6sWdOk",
+  spotifyUrl: "https://open.spotify.com/show/4fDHQi94ECA6DVtHlfaV9l",
+  formEndpoint: "https://formspree.io/f/PASTE_YOUR_ID_HERE", // We will fix this in Step 7
+  logoReady: false
+};

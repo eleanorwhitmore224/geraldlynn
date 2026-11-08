@@ -1,30 +1,27 @@
 // js/animations.js
 // ==========================================================================
-// Gerald Lynn Author Website — Animation Engine
-// ==========================================================================
-// Purposeful, performance-conscious animations. Every motion serves a
-// function: guiding attention, confirming interaction, or revealing content
-// as the user scrolls. No gratuitous floating blobs or random parallax.
-//
-// Respects prefers-reduced-motion at every level.
+// Gerald Lynn Author Website — Animation Engine (FULL RESTORED)
 // ==========================================================================
 
 "use strict";
 
-// Tell CSS that JavaScript is running so it can enable the reveal animations.
+// Tell CSS that JS is running so it can enable the reveal animations.
 document.documentElement.classList.add("js");
+
+/* --------------------------------------------------------------------------
+   SAFETY FALLBACKS
+   These ensure the file doesn't crash if main.js fails to load its helpers.
+   -------------------------------------------------------------------------- */
+const qsa = window.qsa || ((sel, ctx) => (ctx || document).querySelectorAll(sel));
+const on = window.on || ((el, ev, fn, opts) => el.addEventListener(ev, fn, opts));
+const debounce = window.debounce || ((fn, ms) => { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); }; });
+const throttle = window.throttle || ((fn, ms) => { let wait = false; return () => { if (wait) return; fn(); wait = true; setTimeout(() => wait = false, ms); }; });
+const clamp = window.clamp || ((val, min, max) => Math.min(Math.max(val, min), max));
+const lerp = window.lerp || ((start, end, amt) => (1 - amt) * start + amt * end);
 
 /* --------------------------------------------------------------------------
    1. REDUCED MOTION GATE
    -------------------------------------------------------------------------- */
-
-/**
- * Central check for reduced motion preference. All animation modules
- * consult this before doing anything. If the user prefers reduced motion,
- * we skip animations entirely and just show content in its final state.
- *
- * @returns {boolean} True if animations should be suppressed
- */
 function shouldReduceMotion() {
   return (
     window.matchMedia &&
@@ -32,13 +29,8 @@ function shouldReduceMotion() {
   );
 }
 
-/**
- * Listen for changes to the reduced motion preference (the user can toggle
- * this in their OS settings at any time).
- */
 function watchReducedMotion() {
   if (!window.matchMedia) return;
-
   const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   function handleChange(e) {
@@ -64,14 +56,6 @@ function watchReducedMotion() {
 /* --------------------------------------------------------------------------
    2. REVEAL-ON-SCROLL SYSTEM
    -------------------------------------------------------------------------- */
-
-/**
- * The core reveal system. Elements with .reveal, .reveal-left, .reveal-right,
- * or .reveal-scale classes start invisible (via CSS) and animate into view
- * when they enter the viewport.
- *
- * CSS handles the actual transition; JS just toggles the .is-visible class.
- */
 function initRevealObserver() {
   if (shouldReduceMotion()) {
     revealAllImmediately();
@@ -99,22 +83,18 @@ function initRevealObserver() {
         if (entry.isIntersecting) {
           const el = entry.target;
 
-          // Check for stagger delay
           const staggerIndex = el.getAttribute("data-stagger");
           if (staggerIndex) {
             const delay = parseInt(staggerIndex, 10) * 100;
             el.style.transitionDelay = delay + "ms";
           }
 
-          // Custom delay override
           const customDelay = el.getAttribute("data-delay");
           if (customDelay) {
             el.style.transitionDelay = customDelay + "ms";
           }
 
           el.classList.add("is-visible");
-
-          // Stop observing once revealed (one-shot animation)
           revealObserver.unobserve(el);
         }
       });
@@ -130,17 +110,12 @@ function initRevealObserver() {
     revealObserver.observe(el);
   });
 
-  // Safety net: if something goes wrong, force everything visible after 3s
+  // SAFETY NET: If the observer fails to fire, force everything visible after 3s.
   setTimeout(revealAllImmediately, 3000);
 
-  // Store reference for cleanup if needed
   window.__glRevealObserver = revealObserver;
 }
 
-/**
- * Immediately show all reveal elements without animation. Used when
- * reduced motion is active or IO is not supported.
- */
 function revealAllImmediately() {
   const revealSelectors = [
     ".reveal",
@@ -159,12 +134,6 @@ function revealAllImmediately() {
 /* --------------------------------------------------------------------------
    3. STAGGERED CHILDREN
    -------------------------------------------------------------------------- */
-
-/**
- * For containers with data-stagger-children="true", automatically assign
- * stagger indices to each direct child that has a reveal class. This avoids
- * manually adding data-stagger="0", data-stagger="1", etc. to every card.
- */
 function initStaggeredChildren() {
   if (shouldReduceMotion()) return;
 
@@ -185,15 +154,6 @@ function initStaggeredChildren() {
 /* --------------------------------------------------------------------------
    4. COUNT-UP ANIMATION
    -------------------------------------------------------------------------- */
-
-/**
- * Animate numbers counting up from 0 to their target value when they scroll
- * into view. Only used for real, verified numbers:
- *   - 27 (years in pharma)
- *   - 4.8 (star rating)
- *   - 9 (chapters)
- *   - 4 (star breakdown)
- */
 function initCountUp() {
   if (shouldReduceMotion()) {
     setCountUpFinalValues();
@@ -225,10 +185,6 @@ function initCountUp() {
   });
 }
 
-/**
- * Animate a single counter element from 0 to its target.
- * @param {Element} el - The counter element
- */
 function animateCount(el) {
   const target = parseFloat(el.getAttribute("data-target"));
   if (isNaN(target)) return;
@@ -243,8 +199,6 @@ function animateCount(el) {
   function update(currentTime) {
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
-
-    // Ease-out cubic for a natural deceleration
     const eased = 1 - Math.pow(1 - progress, 3);
     const current = eased * target;
 
@@ -253,7 +207,6 @@ function animateCount(el) {
     if (progress < 1) {
       requestAnimationFrame(update);
     } else {
-      // Ensure exact final value
       el.textContent = prefix + target.toFixed(decimals) + suffix;
     }
   }
@@ -261,9 +214,6 @@ function animateCount(el) {
   requestAnimationFrame(update);
 }
 
-/**
- * Set all counters to their final values immediately (no animation).
- */
 function setCountUpFinalValues() {
   const counters = qsa(".count-up");
   counters.forEach(function (el) {
@@ -281,10 +231,6 @@ function setCountUpFinalValues() {
 /* --------------------------------------------------------------------------
    5. SUBTLE PARALLAX FOR HERO SECTIONS
    -------------------------------------------------------------------------- */
-
-/**
- * A lightweight parallax effect for hero background images.
- */
 function initParallax() {
   if (shouldReduceMotion()) return;
   if (window.innerWidth < 768) return;
@@ -326,10 +272,6 @@ function initParallax() {
 /* --------------------------------------------------------------------------
    6. SCROLL-TRIGGERED SECTION CLASSES
    -------------------------------------------------------------------------- */
-
-/**
- * Add an "in-view" class to sections as they enter the viewport.
- */
 function initSectionObserver() {
   if (shouldReduceMotion()) return;
   if (!("IntersectionObserver" in window)) return;
@@ -359,10 +301,6 @@ function initSectionObserver() {
 /* --------------------------------------------------------------------------
    7. PAGE LOAD SEQUENCE
    -------------------------------------------------------------------------- */
-
-/**
- * Orchestrate the initial page load animation sequence.
- */
 function initPageLoadSequence() {
   if (shouldReduceMotion()) {
     showAllLoadElements();
@@ -388,9 +326,6 @@ function initPageLoadSequence() {
   });
 }
 
-/**
- * Show all load-sequence elements immediately.
- */
 function showAllLoadElements() {
   const loadElements = qsa("[data-load-order]");
   loadElements.forEach(function (el) {
@@ -401,7 +336,6 @@ function showAllLoadElements() {
 /* --------------------------------------------------------------------------
    8. ANIMATED UNDERLINE FOR LINKS
    -------------------------------------------------------------------------- */
-
 function initLinkUnderlines() {
   if (shouldReduceMotion()) return;
 
@@ -419,7 +353,6 @@ function initLinkUnderlines() {
 /* --------------------------------------------------------------------------
    9. CARD HOVER LIFT
    -------------------------------------------------------------------------- */
-
 function initCardHover() {
   const cards = qsa(".card, .review-card, .chapter-card");
   if (cards.length === 0) return;
@@ -441,7 +374,6 @@ function initCardHover() {
 /* --------------------------------------------------------------------------
    10. IMAGE REVEAL ON SCROLL
    -------------------------------------------------------------------------- */
-
 function initImageReveal() {
   if (shouldReduceMotion()) {
     qsa(".img-reveal").forEach(function (img) {
@@ -480,7 +412,6 @@ function initImageReveal() {
 /* --------------------------------------------------------------------------
    11. TAB RAIL SCROLL SPY (ENHANCEMENT)
    -------------------------------------------------------------------------- */
-
 function initTabRailSpy() {
   if (shouldReduceMotion()) return;
   if (!("IntersectionObserver" in window)) return;
@@ -527,7 +458,6 @@ function initTabRailSpy() {
 /* --------------------------------------------------------------------------
    12. TEXT SPLIT ANIMATION HELPERS
    -------------------------------------------------------------------------- */
-
 function initTextSplit() {
   if (shouldReduceMotion()) return;
 
@@ -559,14 +489,12 @@ function initTextSplit() {
 /* --------------------------------------------------------------------------
    13. SCROLL VELOCITY DETECTION
    -------------------------------------------------------------------------- */
-
 function initScrollVelocity() {
   if (shouldReduceMotion()) return;
 
   let lastScrollY = window.pageYOffset;
   let lastTime = performance.now();
   let velocity = 0;
-
   const fastThreshold = 30;
 
   const checkVelocity = throttle(function () {
@@ -594,7 +522,6 @@ function initScrollVelocity() {
 /* --------------------------------------------------------------------------
    14. SECTION PROGRESS INDICATORS
    -------------------------------------------------------------------------- */
-
 function initSectionProgress() {
   if (shouldReduceMotion()) return;
 
@@ -614,7 +541,6 @@ function initSectionProgress() {
 
       const sectionTop = rect.top + scrollY;
       const sectionHeight = rect.height;
-
       const scrolledPast = scrollY + viewH * 0.5 - sectionTop;
       const progress = clamp(scrolledPast / sectionHeight, 0, 1);
 
@@ -637,7 +563,6 @@ function initSectionProgress() {
 /* --------------------------------------------------------------------------
    15. HERO TAGLINE TYPEWRITER (OPTIONAL)
    -------------------------------------------------------------------------- */
-
 function initTypewriter() {
   if (shouldReduceMotion()) {
     qsa(".typewriter").forEach(function (el) {
@@ -674,7 +599,6 @@ function initTypewriter() {
 /* --------------------------------------------------------------------------
    16. MAGNETIC BUTTON EFFECT (DESKTOP ONLY)
    -------------------------------------------------------------------------- */
-
 function initMagneticButtons() {
   if (shouldReduceMotion()) return;
   if (document.body.classList.contains("is-touch")) return;
@@ -697,8 +621,7 @@ function initMagneticButtons() {
       const shiftX = clamp(deltaX * maxShift, -maxShift, maxShift);
       const shiftY = clamp(deltaY * maxShift, -maxShift, maxShift);
 
-      btn.style.transform =
-        "translate(" + shiftX + "px, " + shiftY + "px)";
+      btn.style.transform = "translate(" + shiftX + "px, " + shiftY + "px)";
     });
 
     on(btn, "mouseleave", function () {
@@ -710,7 +633,6 @@ function initMagneticButtons() {
 /* --------------------------------------------------------------------------
    17. SMOOTH NUMBER TRANSITIONS
    -------------------------------------------------------------------------- */
-
 function animateNumberChange(el, newValue, duration) {
   if (shouldReduceMotion()) {
     el.textContent = newValue;
@@ -744,7 +666,6 @@ function animateNumberChange(el, newValue, duration) {
 /* --------------------------------------------------------------------------
    18. RAF LOOP MANAGER
    -------------------------------------------------------------------------- */
-
 const RAFManager = (function () {
   let callbacks = [];
   let rafId = null;
@@ -793,7 +714,6 @@ const RAFManager = (function () {
 /* --------------------------------------------------------------------------
    19. CLEANUP & DISCONNECT
    -------------------------------------------------------------------------- */
-
 function cleanupAnimations() {
   if (window.__glRevealObserver) {
     window.__glRevealObserver.disconnect();
@@ -801,7 +721,6 @@ function cleanupAnimations() {
   RAFManager.stop();
 }
 
-// Clean up on page hide (back/forward cache)
 if (typeof window !== "undefined") {
   window.addEventListener("pagehide", cleanupAnimations);
 }
@@ -809,7 +728,6 @@ if (typeof window !== "undefined") {
 /* --------------------------------------------------------------------------
    20. ANIMATION INITIALIZATION
    -------------------------------------------------------------------------- */
-
 function initAnimations() {
   watchReducedMotion();
 
@@ -840,16 +758,14 @@ function initAnimations() {
 /* --------------------------------------------------------------------------
    21. BOOT
    -------------------------------------------------------------------------- */
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initAnimations);
 } else {
   initAnimations();
 }
 
-// Fix for Back Button (bfcache) - Force everything visible on pageshow
+// Force visibility on Back button (bfcache)
 window.addEventListener("pageshow", function (event) {
-  // If the page was restored from cache
   if (event.persisted) {
     revealAllImmediately();
     setCountUpFinalValues();

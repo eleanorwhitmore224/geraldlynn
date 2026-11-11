@@ -33,7 +33,7 @@ const SITE_CONFIG = {
   facebookUrl: "https://www.facebook.com/p/Gerald-Lynn-61577333356109/",
   linkedinUrl: "https://www.linkedin.com/in/gerald-lynn-c-m-r-1866a930",
   youtubeChannelUrl: "",
-  tiktokUrl: "",
+  tiktokUrl: "https://www.tiktok.com/@glynnauthor",
   threadsUrl: "",
   xUrl: "",
 

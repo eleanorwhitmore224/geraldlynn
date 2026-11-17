@@ -44,9 +44,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Google Fonts: Bricolage Grotesque (headings) + Instrument Sans (body) -->
+  <!-- Google Fonts: Playfair Display (headings) + Inter (body) -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet"
   >
 
@@ -157,7 +157,6 @@
 
       <!-- Logo / Wordmark -->
       <a href="index.html" class="header__logo" aria-label="Gerald Lynn, C.M.R., homepage">
-        <!-- TODO: Replace with actual logo image when Gerald provides one -->
         <span class="header__wordmark">Gerald Lynn, <abbr title="Certified Medical Representative">C.M.R.</abbr></span>
       </a>
 
@@ -177,13 +176,14 @@
           <li class="nav__item"><a href="reviews/" class="nav__link">Reviews</a></li>
           <li class="nav__item"><a href="speaking/" class="nav__link">Speaking</a></li>
           <li class="nav__item"><a href="faq/" class="nav__link">FAQ</a></li>
+          <li class="nav__item"><a href="buy/" class="nav__link">Buy</a></li>
           <li class="nav__item"><a href="contact/" class="nav__link">Contact</a></li>
         </ul>
       </nav>
 
       <!-- Buy CTA (always visible in header) -->
       <a href="https://www.amazon.com/dp/B0FXCZVW2J" class="btn btn--gold btn--sm header__cta" data-config="kindleUrl">
-        Buy the Book
+        Buy on Amazon
       </a>
 
     </div>
@@ -222,12 +222,15 @@
       <a href="faq/" class="mobile-nav-link">
         <span class="mobile-nav-link__dot" style="background-color: var(--tab-navy);" aria-hidden="true"></span> FAQ
       </a>
+      <a href="buy/" class="mobile-nav-link">
+        <span class="mobile-nav-link__dot" style="background-color: var(--gold);" aria-hidden="true"></span> Buy
+      </a>
       <a href="contact/" class="mobile-nav-link">
         <span class="mobile-nav-link__dot" style="background-color: var(--gold);" aria-hidden="true"></span> Contact
       </a>
     </div>
     <div class="mobile-menu__cta">
-      <a href="https://www.amazon.com/dp/B0FXCZVW2J" class="btn btn--gold" style="width: 100%;">Buy the Book</a>
+      <a href="https://www.amazon.com/dp/B0FXCZVW2J" class="btn btn--gold" style="width: 100%;">Buy on Amazon</a>
     </div>
     <div class="mobile-menu__social">
       <a href="https://www.instagram.com/geraldlynn.author/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
@@ -241,6 +244,9 @@
       </a>
       <a href="https://www.goodreads.com/author/show/60993565.Gerald_Lynn_C_M_R_" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Goodreads">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@glynnauthor" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
       </a>
     </div>
     <div class="mobile-menu__footer">
@@ -292,7 +298,7 @@
     <!-- ==============================================================
          SECTION 1: HERO
          ============================================================== -->
-    <section class="hero" id="hero" aria-labelledby="hero-heading">
+    <section class="hero" id="hero" aria-labelledby="hero-heading" style="background-color: var(--navy); color: var(--white);">
       <div class="container hero__inner">
         
         <!-- Book Cover -->
@@ -310,14 +316,14 @@
 
         <!-- Hero Text -->
         <div class="hero__text reveal" data-load-order="2">
-          <p class="overline">A Patient's Playbook for Real Life</p>
-          <h1 id="hero-heading" class="display hero__title">
+          <p class="overline" style="color: var(--gold-light);">A Patient's Playbook for Real Life</p>
+          <h1 id="hero-heading" class="display hero__title" style="color: var(--white);">
             Surviving the U.S. Healthcare System
           </h1>
-          <p class="subtitle hero__subtitle">
+          <p class="subtitle hero__subtitle" style="color: var(--text-on-navy);">
             How to understand, navigate, and thrive, before, during, and after major medical events.
           </p>
-          <p class="hero__byline">
+          <p class="hero__byline" style="color: var(--white);">
             By <strong>Gerald Lynn, C.M.R.</strong>
           </p>
 
@@ -326,17 +332,17 @@
             <a href="https://www.amazon.com/dp/B0FXCZVW2J" class="btn btn--gold btn--lg btn-magnetic" data-config="kindleUrl">
               Get the Kindle Edition
             </a>
-            <a href="about/" class="btn btn--outline btn--lg">
+            <a href="about/" class="btn btn--outline-on-dark btn--lg">
               Learn More About the Book
             </a>
           </div>
 
           <!-- Format badges -->
           <ul class="hero__formats" aria-label="Available formats">
-            <li class="badge badge-outline">Kindle</li>
-            <li class="badge badge-outline">Paperback</li>
-            <li class="badge badge-outline">Hardcover</li>
-            <li class="badge badge-outline">Audiobook</li>
+            <li class="badge badge-outline" style="color: var(--white); border-color: rgba(255,255,255,0.3);">Kindle</li>
+            <li class="badge badge-outline" style="color: var(--white); border-color: rgba(255,255,255,0.3);">Paperback</li>
+            <li class="badge badge-outline" style="color: var(--white); border-color: rgba(255,255,255,0.3);">Hardcover</li>
+            <li class="badge badge-outline" style="color: var(--white); border-color: rgba(255,255,255,0.3);">Audiobook</li>
           </ul>
         </div>
 
@@ -477,13 +483,13 @@
           
           <div class="panel reveal" data-stagger="0" style="border-left: 4px solid var(--tab-blue);">
             <h3 class="h5" style="margin-bottom: var(--sp-xs);">Misdiagnoses</h3>
-            <p class="text-sm text-secondary">Learn how miscommunication between specialists and primary care doctors happen, and what questions to ask to ensure your symptoms are fully understood.</p>
+            <p class="text-sm text-secondary">Learn how miscommunication between specialists and primary care doctors happens, and what questions to ask to ensure your symptoms are fully understood.</p>
             <a href="chapters/#chapter-2" class="arrow-link" style="margin-top: var(--sp-sm);">See Chapter 2 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
 
           <div class="panel reveal" data-stagger="1" style="border-left: 4px solid var(--tab-green);">
-            <h3 class="h5" style="margin-bottom: var(--sp-xs);">Medication Errors</h3>
-            <p class="text-sm text-secondary">Potentially fatal medication errors occur more often than you think. Discover how to recognize when you are experiencing a drug interaction and your doctor may not know why.</p>
+            <h3 class="h5" style="margin-bottom: var(--sp-xs);">Medication Errors and Drug Interactions</h3>
+            <p class="text-sm text-secondary">Potentially Fatal medication errors occur when you are seeing multiple doctors and on multiple medications, more often than you think. Discover how to recognize when you are experiencing a drug interaction and your doctor may not know why.</p>
             <a href="chapters/#chapter-3" class="arrow-link" style="margin-top: var(--sp-sm);">See Chapter 3 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           </div>
 
@@ -596,7 +602,7 @@
             <div class="img-frame">
               <div class="img-frame__accent"></div>
               <div class="img-frame__image">
-                <img src="assets/images/gerald-lynn-life-on-fire-dallas-2026-closeup-600w.jpg" alt="Gerald Lynn smiling and holding his book in a navy blazer" loading="lazy" width="600" height="800" style="aspect-ratio: 3/4; object-fit: cover; object-position: top;">
+                <img src="assets/images/gerald-lynn-life-on-fire-dallas-2026-closeup-600w.jpg" alt="Gerald Lynn smiling and holding his book in a navy blazer" loading="lazy" width="600" height="800" style="aspect-ratio: 4/5; object-fit: cover; object-position: center top;">
               </div>
             </div>
           </div>
@@ -776,14 +782,14 @@
     </section>
 
     <!-- ==============================================================
-         SECTION 11: CHOOSE YOUR FORMAT
+         SECTION 11: WHERE TO BUY
          ============================================================== -->
     <section class="section" id="formats" aria-labelledby="formats-heading">
       <div class="container">
         
         <div class="section__header reveal text-center">
           <div class="tab-heading tab-heading--blue" style="justify-content: center;">
-            <h2 id="formats-heading" class="section__title">Choose Your Format</h2>
+            <h2 id="formats-heading" class="section__title">Where to buy</h2>
           </div>
           <p class="section__subtitle">Available everywhere you buy books.</p>
         </div>
@@ -827,8 +833,7 @@
             </div>
             <h3 class="format-card__title">Hardcover</h3>
             <p class="format-card__desc">Durable edition for your permanent library.</p>
-            <!-- TODO(GERALD): Hardcover link pending -->
-            <a href="#" class="btn btn--outline btn--sm" data-config="hardcoverUrl">Buy Hardcover</a>
+            <a href="https://www.amazon.com/dp/PASTE_HARDCOVER_LINK_HERE" class="btn btn--outline btn--sm" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
           </div>
 
           <!-- Barnes & Noble -->
@@ -1077,6 +1082,9 @@
             <a href="https://www.goodreads.com/author/show/60993565.Gerald_Lynn_C_M_R_" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Goodreads">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             </a>
+            <a href="https://www.tiktok.com/@glynnauthor" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+            </a>
           </div>
         </div>
 
@@ -1105,6 +1113,12 @@
             <a href="contact/" class="footer-link">
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> Contact
             </a>
+            <a href="buy/#bulk" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> Bulk Orders
+            </a>
+            <a href="https://www.tiktok.com/@glynnauthor" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> TikTok
+            </a>
           </div>
         </div>
 
@@ -1122,7 +1136,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Paperback
             </a>
             <!-- TODO(GERALD): Hardcover link pending — uses SITE_CONFIG.hardcoverUrl -->
-            <a href="#" data-config="hardcoverUrl" class="footer-buy-link">
+            <a href="https://www.amazon.com/dp/PASTE_HARDCOVER_LINK_HERE" class="footer-buy-link" target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="6" x2="17" y2="6"/></svg> Hardcover
             </a>
             <a href="https://www.barnesandnoble.com/w/surviving-the-us-healthcare-system-gerald-lynn-c-m-r/1148602416?ean=9798349539831" target="_blank" rel="noopener noreferrer" class="footer-buy-link">

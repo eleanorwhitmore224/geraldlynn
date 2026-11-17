@@ -124,8 +124,8 @@
   --ls-mega:      0.12em;
 
   /* ---- Font families ---- */
-  --ff-heading: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --ff-body:    "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --ff-heading: "Playfair Display", "Georgia", serif;
+  --ff-body:    "Inter", "Segoe UI", system-ui, sans-serif;
   --ff-mono:    "JetBrains Mono", "Fira Code", "Consolas", monospace;
 
   /* ---- Spacing Scale (fluid) ---- */
@@ -4302,7 +4302,8 @@ main a:not(.btn):not(.card):not(.card-link):not(.review-card):not(.nav-link):not
    ========================================= */
 .hero {
   padding-block: var(--sp-4xl);
-  background-color: var(--off-white);
+  background-color: var(--navy);
+  color: var(--white);
 }
 
 .hero__inner {
@@ -4327,11 +4328,17 @@ main a:not(.btn):not(.card):not(.card-link):not(.review-card):not(.nav-link):not
 
 .hero__title {
   margin-bottom: var(--sp-sm);
+  color: var(--white);
 }
 
 .hero__byline {
   margin-bottom: var(--sp-lg);
   font-size: var(--fs-md);
+  color: var(--text-on-navy);
+}
+
+.hero__subtitle {
+  color: var(--text-on-navy);
 }
 
 .hero__actions {
@@ -4615,5 +4622,13 @@ section#newsletter {
   .reveal, .reveal-left, .reveal-right, .reveal-scale {
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+/* =========================================
+   HIDE COLORED TAB RAIL ON PHONES
+   ========================================= */
+@media (max-width: 900px) {
+  .tab-rail {
+    display: none !important;
   }
 }

@@ -42,8 +42,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Google Fonts: Bricolage Grotesque + Instrument Sans -->
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Playfair Display + Inter -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="../css/style.css">
@@ -51,7 +54,7 @@
   <link rel="stylesheet" href="../css/footer.css">
   <link rel="stylesheet" href="../css/responsive.css">
 
-  <!-- JSON-LD: WebPage (No AggregateRating or Review schema per Master Brief instructions) -->
+  <!-- JSON-LD: WebPage -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -98,13 +101,14 @@
           <li class="nav__item"><a href="../reviews/index.html" class="nav__link nav__link--active" aria-current="page">Reviews</a></li>
           <li class="nav__item"><a href="../speaking/index.html" class="nav__link">Speaking</a></li>
           <li class="nav__item"><a href="../faq/index.html" class="nav__link">FAQ</a></li>
+          <li class="nav__item"><a href="../buy/index.html" class="nav__link">Buy</a></li>
           <li class="nav__item"><a href="../contact/index.html" class="nav__link">Contact</a></li>
         </ul>
       </nav>
 
       <!-- Buy CTA -->
       <a href="https://www.amazon.com/dp/B0FXCZVW2J" class="btn btn--gold btn--sm header__cta" data-config="kindleUrl">
-        Buy the Book
+        Buy on Amazon
       </a>
 
     </div>
@@ -121,9 +125,9 @@
     <section class="page-hero page-hero--navy" aria-labelledby="reviews-hero-heading">
       <div class="page-hero__pattern"></div>
       <div class="container">
-        
+
         <div class="page-hero__content grid-60-40 reveal">
-          
+
           <!-- Left Side: Text Content -->
           <div class="page-hero__text">
             <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
@@ -133,7 +137,7 @@
               <span class="sep">/</span>
               <span aria-current="page">Reviews</span>
             </nav>
-            
+
             <span class="overline" style="color: var(--gold-light);">Reader Voices</span>
             <h1 id="reviews-hero-heading" class="display" style="color: var(--white); margin-bottom: var(--sp-md);">
               What Readers Are Saying
@@ -141,7 +145,7 @@
             <p class="subtitle" style="color: var(--text-on-navy); margin-bottom: var(--sp-xl);">
               Real feedback from real readers. Discover why patients, caregivers, and healthcare professionals are calling this book a must-read.
             </p>
-            
+
             <div class="btn-group">
               <a href="#reviews-list" class="btn btn--gold btn--lg">
                 Read the Reviews
@@ -171,10 +175,10 @@
          ============================================================== -->
     <section class="section section--cream" aria-labelledby="rating-summary-heading">
       <div class="container container--narrow">
-        
+
         <div class="panel panel--shadow reveal" style="padding: var(--sp-2xl);">
           <div class="grid-2" style="align-items: center; gap: var(--sp-xl);">
-            
+
             <!-- Overall Score -->
             <div class="text-center">
               <div class="rating-summary" style="justify-content: center; flex-direction: column;">
@@ -190,7 +194,7 @@
             <div>
               <h3 id="rating-summary-heading" class="h4" style="margin-bottom: var(--sp-md);">Rating Breakdown</h3>
               <div class="rating-bars">
-                
+
                 <div class="rating-bar">
                   <span class="rating-bar__label">5 stars</span>
                   <div class="rating-bar__track">
@@ -262,7 +266,7 @@
          ============================================================== -->
     <section class="section section--ice" id="reviews-list" aria-labelledby="all-reviews-heading">
       <div class="container">
-        
+
         <div class="section__header reveal">
           <div class="tab-heading tab-heading--orange">
             <h2 id="all-reviews-heading" class="section__title">All Reader Reviews</h2>
@@ -271,7 +275,7 @@
         </div>
 
         <div class="grid-2" data-stagger-children>
-          
+
           <!-- Review 1: James Simmons -->
           <blockquote class="review-card review-card--featured reveal" data-stagger="0">
             <div class="review-card__stars" aria-label="5 out of 5 stars">
@@ -430,7 +434,7 @@
          ============================================================== -->
     <section class="section section--cream" aria-labelledby="leave-review-heading">
       <div class="container container--narrow text-center reveal">
-        
+
         <h2 id="leave-review-heading" class="section__title" style="margin-bottom: var(--sp-sm);">
           Have You Read the Book?
         </h2>
@@ -462,7 +466,7 @@
          ============================================================== -->
     <section class="section" aria-labelledby="share-story-heading">
       <div class="container container--narrow">
-        
+
         <div class="panel panel--navy reveal" style="padding: var(--sp-2xl);">
           <div class="text-center" style="margin-bottom: var(--sp-xl);">
             <div class="tab-heading tab-heading--gold" style="justify-content: center;">
@@ -473,7 +477,8 @@
             </p>
           </div>
 
-          <form class="newsletter__form" data-form="contact" action="#" method="POST" novalidate style="max-width: 600px; margin: 0 auto;">
+          <form class="newsletter__form" data-form="contact" action="https://formspree.io/f/mdeejpdq" method="POST" novalidate style="max-width: 600px; margin: 0 auto;">
+            <input type="hidden" name="form_type" value="story">
             <!-- Honeypot -->
             <div class="hp-field-wrap" aria-hidden="true" style="position: absolute; left: -9999px;">
               <label for="story-gotcha">Leave this field empty</label>
@@ -517,7 +522,7 @@
          ============================================================== -->
     <section class="section section--ice" id="newsletter" aria-labelledby="newsletter-heading">
       <div class="container container--narrow">
-        
+
         <div class="newsletter text-center reveal">
           <h2 id="newsletter-heading" class="section__title" style="margin-bottom: var(--sp-sm);">
             Stay Connected
@@ -526,7 +531,8 @@
             Get updates on upcoming speaking events, new chapters, healthcare tips, and more. No spam, just useful information.
           </p>
 
-          <form class="newsletter__form" data-form="newsletter" data-persist="true" action="#" method="POST" novalidate style="max-width: 480px; margin: 0 auto;">
+          <form class="newsletter__form" data-form="newsletter" data-persist="true" action="https://formspree.io/f/mdeejpdq" method="POST" novalidate style="max-width: 480px; margin: 0 auto;">
+            <input type="hidden" name="form_type" value="newsletter">
             <div class="hp-field-wrap" aria-hidden="true" style="position: absolute; left: -9999px;">
               <label for="newsletter-gotcha">Leave this field empty</label>
               <input type="text" id="newsletter-gotcha" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off">
@@ -580,6 +586,9 @@
             <a href="https://www.goodreads.com/author/show/60993565.Gerald_Lynn_C_M_R_" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Goodreads">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             </a>
+            <a href="https://www.tiktok.com/@glynnauthor" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+            </a>
           </div>
         </div>
 
@@ -607,6 +616,12 @@
             </a>
             <a href="../contact/index.html" class="footer-link">
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> Contact
+            </a>
+            <a href="../buy/#bulk" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> Bulk Orders
+            </a>
+            <a href="https://www.tiktok.com/@glynnauthor" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 2l5 5-5 5"/></svg> TikTok
             </a>
           </div>
         </div>
@@ -640,8 +655,7 @@
             Get healthcare tips, book updates, and event announcements. No spam. Unsubscribe anytime.
           </p>
           <form class="newsletter-inline" id="footer-newsletter-form" data-form="newsletter" action="https://formspree.io/f/mdeejpdq" method="POST" novalidate>
-  <input type="hidden" name="form_type" value="newsletter">
-  <label for="footer-newsletter-email" class="sr-only">Email address</label>
+            <input type="hidden" name="form_type" value="newsletter">
             <label for="footer-newsletter-email" class="sr-only">Email address</label>
             <input type="email" id="footer-newsletter-email" name="email" class="form-input" placeholder="Your email address" required autocomplete="email" aria-required="true">
             <div class="form-hp" aria-hidden="true">
